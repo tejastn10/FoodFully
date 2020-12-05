@@ -1,0 +1,21 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Backend Server for FoodFully App",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "server": "nodemon index",
+    "webapp": "npm start --prefix ../frontend",
+    "mobapp": "npm start --prefix ../app",
+    "dev1": "concurrently \"[{name}]\" -n \"Node,React\" -c \"yellow.bold,cyan.bold\" \"npm run server\" \"npm run webapp\"",
+    "dev2": "concurrently \"[{name}]\" -n \"Node,React-Native\" -c \"yellow.bold,blue.bold\" \"npm run server\" \"npm run mobapp\""
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.6"
+  }
+}
