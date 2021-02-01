@@ -1,0 +1,27 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "FoodFully backend server",
+  "main": "app.js",
+  "scripts": {
+    "watch-ts": "tsc -w",
+    "server": "nodemon dist/app.js",
+    "web": "yarn --cwd ../frontend/web/ start",
+    "mobile": "yarn --cwd ../frontend/mobile/ start",
+    "start": "concurrently -k -p \"[{name}]\" -n \"Typescript,Node\" -c \"blue.bold,yellow.bold\" \"yarn run watch-ts\" \"yarn run server\"",
+    "dev1": "concurrently -k -p \"[{name}]\" -n \"Typescript,Node,React\" -c \"blue.bold,yellow.bold,cyan.bold\" \"yarn run watch-ts\" \"yarn run server\" \"yarn run web\"",
+    "dev2": "concurrently -k -p \"[{name}]\" -n \"Typescript,Node,RN\" -c \"blue.bold,yellow.bold,cyan.bold\" \"yarn run watch-ts\" \"yarn run server\" \"yarn run mobile\""
+  },
+  "dependencies": {
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.9",
+    "@types/express": "^4.17.11",
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.7"
+  }
+}
