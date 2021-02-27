@@ -2,13 +2,23 @@ import express, { json, Application, Request, Response } from "express";
 import cors from "cors";
 import "colors";
 import { config } from "dotenv";
+import { connectDB } from "./config/db";
+import { errorHandler, notFound } from "./middleware/error";
+import { router as userRoutes } from "./router/user";
 
 config();
 
 const app: Application = express();
 
+connectDB();
+
 app.use(cors());
 app.use(json());
+
+app.use("/api/users", userRoutes);
+
+app.use(notFound);
+app.use(errorHandler);
 
 app.get("/", (_req: Request, res: Response) =>
   res.send("API Running on Port 5000")
