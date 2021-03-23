@@ -1,3 +1,9 @@
+import {
+  NODE_ENV,
+  REACT_APP_PRODUCTION_API_ENDPOINT,
+  REACT_APP_DEVELOPMENT_API_ENDPOINT,
+} from "@env";
+
 type Config = {
   isProd: boolean;
   production: {
@@ -9,12 +15,12 @@ type Config = {
 };
 
 const config: Config = {
-  isProd: process.env.NODE_ENV === "production",
+  isProd: NODE_ENV === "production",
   production: {
-    api_endpoint: process.env.REACT_APP_PRODUCTION_API_ENDPOINT || "",
+    api_endpoint: REACT_APP_PRODUCTION_API_ENDPOINT || "",
   },
   development: {
-    api_endpoint: process.env.REACT_APP_DEVELOPMENT_API_ENDPOINT || "",
+    api_endpoint: REACT_APP_DEVELOPMENT_API_ENDPOINT || "",
   },
 };
 
