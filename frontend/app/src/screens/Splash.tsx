@@ -3,12 +3,13 @@ import { StyleSheet } from "react-native";
 import { Text } from "../components/Themed";
 import Center from "../components/Center";
 import { RouteStackParamList } from "../router/types";
-import { getFromLocalStorage } from "../utils/api-helper";
+import useAuth from "../hooks/useAuth";
 
 const Splash: React.FC<RouteStackParamList<"Splash">> = ({
   navigation,
 }: RouteStackParamList<"Splash">) => {
-  const isAuth = getFromLocalStorage("user") ? true : false;
+  const { user } = useAuth();
+  const isAuth = user ? true : false;
 
   setTimeout(() => {
     navigation.replace(isAuth ? "Root" : "Login");
