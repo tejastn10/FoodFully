@@ -1,6 +1,6 @@
 import axios from "axios";
 import requestConfig from "../config/request";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export type CustomError = {
   code?: number;
@@ -31,11 +31,11 @@ export const getFromLocalStorage = async (key: string) => {
   try {
     const serializedState = await AsyncStorage.getItem(key);
     if (serializedState === null) {
-      return undefined;
+      return null;
     }
     return JSON.parse(serializedState);
   } catch (err) {
-    return undefined;
+    return null;
   }
 };
 
@@ -43,8 +43,10 @@ export const saveToLocalStorage = async (key: string, value: any) => {
   try {
     const serializedState = JSON.stringify(value);
     await AsyncStorage.setItem(key, serializedState);
+
+    console.log("Stored data");
   } catch (err) {
-    // Ignoring write error as of now
+    console.log(`Error: ${err}`);
   }
 };
 
