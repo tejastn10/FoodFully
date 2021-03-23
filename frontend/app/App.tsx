@@ -12,15 +12,18 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-declare const global: {HermesInternal: null | {}};
+import Navigator from "./src/router/Navigator";
+import useColorScheme from "./src/hooks/useColorScheme";
 
 const initialState: ApplicationState = {
 };
 const store = configureAppStore(initialState);
 
 const App = () => {
+  const colorScheme = useColorScheme();
   return (
     <Provider store={store}>
+      <Navigator colorScheme={colorScheme} />
       <StatusBar />
     </Provider>
   );
