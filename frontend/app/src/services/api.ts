@@ -20,3 +20,14 @@ export const registerUser: any = (user: any) => {
   return API.post(URL, user);
 };
 
+export const fetchUserProfile: any = () => {
+  const URL = `${API_ENDPOINT}/api/users/profile`;
+
+  return API.get(URL);
+};
+
+export const updateUserProfile: any = (user: any) => {
+  const URL = `${API_ENDPOINT}/api/users/profile`;
+
+  return API.put(URL, user);
+};
