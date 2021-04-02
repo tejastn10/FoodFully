@@ -5,8 +5,6 @@
 
 An App which helps in distributing food to the needy.
 
-An E-Commerece App to buy your favourite brand shoes and make your footwear collection grow.
-
 ### Built With
 
 * [React](https://reactjs.org/)
