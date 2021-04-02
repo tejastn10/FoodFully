@@ -1,18 +1,14 @@
 import { Button, Col, Form, Input, Row } from "antd";
 import layout from "antd/lib/layout/layout";
-import { Footer } from "./Footer";
-import { Navbar } from "./Nav";
 
 const Contact = () => {
   return (
     <div>
-      <Navbar />
-
       <Row gutter={[8, 8]}>
         <Col span={12}>
           <img
             src="https://image.freepik.com/free-vector/group-people-wearing-masks-gathering-during-coronavirus-covid-19-outbreak-social-distancing-concept-health-care-medical-flat-character_28576-276.jpg"
-            alt="image"
+            alt="mask wearing people"
           />
         </Col>
 
@@ -60,8 +56,6 @@ const Contact = () => {
           <p>frontdesk@hotelbt.co</p>
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 };
