@@ -3,10 +3,9 @@ import { Button, Col, Form, Input, message as msg, Row } from "antd";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import { AuthState } from "../store/@types";
-import { clearAuthError, loginAuthRequest } from "../store/actions/auth";
-import { ApplicationState } from "../store/store";
-import { Navbar } from "./Nav";
+import { AuthState } from "../../store/@types";
+import { clearAuthError, loginAuthRequest } from "../../store/actions/auth";
+import { ApplicationState } from "../../store/store";
 
 type submitProps = { email: string; password: string };
 
@@ -40,9 +39,6 @@ const Login = () => {
 
   return (
     <div className="login-form">
-      
-      <Navbar />
-
       <Row gutter={[8, 8]}>
         <Col span={12}>
           <img
@@ -101,10 +97,6 @@ const Login = () => {
           </Form>
         </Col>
       </Row>
-
-      <footer id="main-footer">
-        <p>Food Fully&copy; 2021, All RIghts Reserved</p>
-      </footer>
     </div>
   );
 };

@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { Button, message } from "antd";
 import { LogoutOutlined } from "@ant-design/icons";
-import { logoutUser } from "../store/actions/actions";
+import { logoutUser } from "../../store/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { ApplicationState } from "../store/store";
-import { AuthState } from "../store/@types";
+import { ApplicationState } from "../../store/store";
+import { AuthState } from "../../store/@types";
 
 export const Navbar = () => {
   const authState = useSelector<ApplicationState, AuthState>(

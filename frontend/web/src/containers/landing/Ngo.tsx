@@ -1,6 +1,4 @@
 import { Button, Col, Form, Input, Row } from "antd";
-import { Footer } from "./Footer";
-import { Navbar } from "./Nav";
 
 const Ngo = () => {
   const onFinish = (values: any) => {
@@ -9,8 +7,6 @@ const Ngo = () => {
 
   return (
     <div className="login-form">
-      <Navbar />
-
       <Row>
         <Col span={12}>
           <div className="hotelform">
@@ -46,8 +42,6 @@ const Ngo = () => {
           </div>
         </Col>
       </Row>
-
-      <Footer />
     </div>
   );
 };

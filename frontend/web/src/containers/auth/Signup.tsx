@@ -1,12 +1,10 @@
 import { Button, Form, Input, message, Switch, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import { AuthState } from "../store/@types";
-import { clearAuthError, registerAuthRequest } from "../store/actions/auth";
-import { ApplicationState } from "../store/store";
-import { Footer } from "./Footer";
-import { Navbar } from "./Nav";
+import { useHistory } from "react-router-dom";
+import { AuthState } from "../../store/@types";
+import { clearAuthError, registerAuthRequest } from "../../store/actions/auth";
+import { ApplicationState } from "../../store/store";
 
 type submitProps = {
   name: string;
@@ -80,12 +78,9 @@ const Signup = () => {
 
   return (
     <div className="form">
-      <Navbar />
-
       <h1 className="l-heading">
         <span className="text-primary">SignUp</span> Form
       </h1>
-
       <section id="home-info">
         <div className="info-img">
           <Form
@@ -228,8 +223,6 @@ const Signup = () => {
         </div>
         <div className="info-content"></div>
       </section>
-
-      <Footer />
     </div>
   );
 };
