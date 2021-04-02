@@ -1,25 +1,34 @@
 import { Route, Switch } from "react-router-dom";
 
-import Login from "../components/Login";
-import Signup from "../components/Signup";
+import Login from "../containers/auth/Login";
+import Signup from "../containers/auth/Signup";
 import About from "../components/About";
-import Ngo from "../components/Ngo";
-import Landing from "../components/Landing";
+import Ngo from "../containers/landing/Ngo";
+import Landing from "../containers/landing/Landing";
 import Contact from "../components/Contact";
-import Hotel from "../components/Hotel";
+import Hotel from "../containers/landing/Hotel";
+import { AuthState } from "../store/@types";
+import { ApplicationState } from "../store/store";
+import { useSelector } from "react-redux";
 
 export const Routes = () => {
+  const authState = useSelector<ApplicationState, AuthState>(
+    (state) => state.auth
+  );
+
   return (
-    <>
-      <Switch>
-        <Route exact path="/" component={Landing} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/register" component={Signup} />
-        <Route exact path="/about" component={About} />
-        <Route exact path="/contact" component={Contact} />
-        <Route exact path="/hotel" component={Hotel} />
-        <Route exact path="/ngo" component={Ngo} />
-      </Switch>
-    </>
+    <Switch>
+      <Route
+        exact
+        path="/"
+        component={
+          authState.auth ? (authState.auth?.isNgo ? Ngo : Hotel) : Landing
+        }
+      />
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/register" component={Signup} />
+      <Route exact path="/about" component={About} />
+      <Route exact path="/contact" component={Contact} />
+    </Switch>
   );
 };
