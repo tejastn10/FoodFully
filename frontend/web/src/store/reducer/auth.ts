@@ -14,7 +14,7 @@ import {
   clearFromLocalStorage,
   getFromLocalStorage,
   saveToLocalStorage,
-} from "../../utlis/api-helper";
+} from "../../utils/api-helper";
 
 const initialState: AuthState = {
   isLoading: false,

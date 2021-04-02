@@ -3,7 +3,7 @@ import { all, call, fork, put, takeLatest } from "redux-saga/effects";
 
 import * as API from "../../services/api";
 
-import { getCustomError } from "../../utlis/api-helper";
+import { getCustomError } from "../../utils/api-helper";
 
 import {
   loginAuthRequest,

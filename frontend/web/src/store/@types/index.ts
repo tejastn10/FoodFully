@@ -1,4 +1,4 @@
-import { CustomError } from "../../utlis/api-helper";
+import { CustomError } from "../../utils/api-helper";
 import { Auth, AuthState, AuthActionTypes } from "./auth";
 
 export interface Errors {

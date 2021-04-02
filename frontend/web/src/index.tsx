@@ -4,7 +4,6 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-
 import { Provider } from "react-redux";
 import { ApplicationState, configureAppStore } from "./store/store";
 import { AuthInitialState } from "./store/reducer/reducer";
@@ -17,7 +16,7 @@ const store = configureAppStore(initialState);
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-    <App />
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
