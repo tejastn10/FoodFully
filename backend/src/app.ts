@@ -7,6 +7,9 @@ import { errorHandler, notFound } from "./middleware/error";
 import { router as userRoutes } from "./router/user";
 import { router as donationRoutes } from "./router/donation";
 import { router as orderRoutes } from "./router/order";
+import {router as ngoRoutes} from "./router/nearbyNgo";
+import { router as hotelRoutes } from "./router/nearbyHotel";
+
 
 config();
 
@@ -20,6 +23,8 @@ app.use(json());
 app.use("/api/users", userRoutes);
 app.use("/api/donation", donationRoutes);
 app.use("/api/order",orderRoutes);
+app.use("/api/nearbyNgo",ngoRoutes);
+app.use("/api/nearbyHotel",hotelRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
