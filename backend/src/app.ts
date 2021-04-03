@@ -5,6 +5,8 @@ import { config } from "dotenv";
 import { connectDB } from "./config/db";
 import { errorHandler, notFound } from "./middleware/error";
 import { router as userRoutes } from "./router/user";
+import { router as donationRoutes } from "./router/donation";
+import { router as orderRoutes } from "./router/order";
 
 config();
 
@@ -16,6 +18,8 @@ app.use(cors());
 app.use(json());
 
 app.use("/api/users", userRoutes);
+app.use("/api/donation", donationRoutes);
+app.use("/api/order",orderRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
