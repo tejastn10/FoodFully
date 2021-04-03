@@ -5,6 +5,7 @@ export interface IUser extends Document {
   email: string;
   password: string;
   contact : string;
+  isAdmin : boolean;
   isNgo?: boolean;
   address: {
     street: string;
