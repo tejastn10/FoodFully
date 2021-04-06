@@ -1,6 +1,11 @@
 import { Router } from "express";
 import asyncHandler from "express-async-handler";
-import { getUserProfile, postAuthUser, postRegisterUser, putUpdateUser } from "../controller/user";
+import {
+  getUserProfile,
+  postAuthUser,
+  postRegisterUser,
+  putUpdateUser,
+} from "../controller/user";
 import { protect } from "../middleware/auth";
 
 export const router: Router = Router();

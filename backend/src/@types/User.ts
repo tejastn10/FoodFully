@@ -4,9 +4,9 @@ export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
-  contact : string;
-  isAdmin : boolean;
-  isNgo?: boolean;
+  contact: string;
+  isAdmin: boolean;
+  isNgo: boolean;
   address: {
     street: string;
     city: string;
