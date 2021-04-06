@@ -1,3 +1,4 @@
+@import "antd/dist/antd.css";
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -5,4 +6,287 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+section.ant-layout.layout {
+  margin-bottom: -20px;
+}
+
+div#root {
+  margin: auto;
+}
+
+div.ant-row {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+/* Login Form */
+
+div.ant-col.ant-col-12 {
+  text-align: center;
+  margin-top: 2%;
+  margin-bottom: 5%;
+  background-color: silver;
+  border: solid;
+}
+
+form#normal_login.ant-form.ant-form-horizontal.login-form {
+  display: inline-block;
+  text-align: center;
+  margin: 5%;
+  padding: 10px;
+  width: 100%;
+}
+
+form#normal_login.ant-form.ant-form-horizontal.login-form {
+  max-width: 500px;
+}
+
+div.ant-row.ant-form-item {
+  display: block;
+  padding: 5px;
+}
+
+div.ant-col.ant-form-item-label {
+  padding-bottom: 5px;
+}
+
+/* index page CSS */
+/* Main Styling */
+html,
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.7em;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3 {
+  padding-bottom: 20px;
+}
+
+p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+/* Utility Classes */
+.container {
+  margin: auto;
+  max-width: 1100px;
+  overflow: auto;
+  padding: 0 20px;
+}
+
+.text-primary {
+  color: red;
+}
+
+.lead {
+  font-size: 20px;
+}
+
+.btn {
+  display: inline-block;
+  font-size: 18px;
+  color: #fff;
+  background: #333;
+  padding: 13px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #f7c08a;
+  color: #333;
+}
+
+.btn-light {
+  background: #f4f4f4;
+  color: #333;
+}
+
+.bg-dark {
+  background: #333;
+  color: #fff;
+}
+
+.bg-light {
+  background: silver;
+  color: #333;
+}
+
+.bg-primary {
+  background: yellow;
+  color: #333;
+}
+
+.clr {
+  clear: both;
+}
+
+.l-heading {
+  font-size: 40px;
+}
+
+div.container {
+  margin: auto;
+  max-width: 1100px;
+  overflow: auto;
+  padding: 0 20px;
+}
+
+/* NavBar */
+#navbar {
+  background: #333;
+  color: #fff;
+  overflow: auto;
+}
+
+#navbar a {
+  color: #fff;
+}
+
+#navbar h1 {
+  float: left;
+  padding-top: 20px;
+}
+
+#navbar ul {
+  list-style: none;
+  float: right;
+  margin-bottom: 0%;
+}
+
+#navbar ul li {
+  float: left;
+}
+
+#navbar ul li a {
+  display: block;
+  padding: 20px;
+  text-align: center;
+}
+
+#navbar ul li a:hover,
+#navbar ul li a.current {
+  background: #444;
+  color: #f7c08a;
+}
+
+img.logo {
+  height: 61.6px;
+}
+/* Showcase image and text */
+div#showcase {
+  background: url("https://us.123rf.com/450wm/addtodsaporn/addtodsaporn1906/addtodsaporn190600307/124397867-volunteers-provide-food-for-beggars-concepts-feeding-and-help-concept-of-food-sharing-for-the-poor-t.jpg?ver=6")
+    no-repeat center center/cover;
+  height: 600px;
+}
+
+div#showcase .showcase-content {
+  color: #fff;
+  text-align: center;
+  padding-top: 170px;
+}
+
+div#showcase .showcase-content h1 {
+  font-size: 60px;
+  line-height: 1.2em;
+}
+
+div#showcase .showcase-content p {
+  margin-top: 10px;
+  line-height: 1.7em;
+}
+
+/* Features */
+.box {
+  float: left;
+  width: 50%;
+  padding: 50px;
+  text-align: center;
+  background-color: silver;
+}
+
+img.features {
+  height: 70px;
+  margin-bottom: 5px;
+}
+
+/* About Info */
+#about-info .info-right {
+  float: right;
+  width: 50%;
+  min-height: 100%;
+}
+
+#about-info .info-right img {
+  display: block;
+  margin: auto;
+  width: 70%;
+  border-radius: 50%;
+}
+
+#about-info .info-left {
+  float: left;
+  width: 50%;
+  min-height: 100%;
+}
+
+/* Testimonials */
+#testimonials {
+  height: 600px;
+  background: url("https://img.freepik.com/free-photo/room-with-concrete-floor-smoke-background_9083-2991.jpg?size=626&ext=jpg")
+    no-repeat center center/cover;
+  padding-top: 100px;
+}
+
+#testimonials h2 {
+  color: #fff;
+  text-align: center;
+  padding-bottom: 40px;
+}
+
+#testimonials .testimonial {
+  padding: 20px;
+  margin-bottom: 40px;
+  border-radius: 5px;
+  opacity: 0.9;
+}
+
+#testimonials .testimonial img {
+  width: 100px;
+  float: left;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+/* Footer */
+#main-footer {
+  text-align: center;
+  background: #444;
+  color: #fff;
+  padding: 20px;
+}
+
+/* Contact Form */
+div.ant-col.ant-col-offset-8.ant-form-item-control {
+  margin: 0;
+}
+
+/* Signup Form */
+div.ant-row.ant-form-item {
+  text-align: center;
+}
+h1.l-heading {
+  text-align: center;
+}
+/* Hotel Page */
+button.ant-btn {
+  margin-top: 15px;
 }
