@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { generateToken } from "../utlis/generateToken";
+import { generateToken } from "../utils/generateToken";
 
 import { User } from "./../models/User.Model";
 
