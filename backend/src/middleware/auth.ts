@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { verify } from "jsonwebtoken";
-import { User } from "../models";
+import { User } from "../models/User.Model";
 
 type decoded = {
   id: string;
