@@ -37,6 +37,9 @@ const donationSchema = new Schema<IDonation>({
     type: Date,
     default: Date.now(),
   },
+  token: {
+    type: String,
+  },
 });
 
 export const Donation = model<IDonation>("Donation", donationSchema);
