@@ -9,4 +9,5 @@ export interface IDonation extends Document {
   donatedOn: Date;
   accepted: Boolean;
   acceptedOn: Date;
+  token: string;
 }
