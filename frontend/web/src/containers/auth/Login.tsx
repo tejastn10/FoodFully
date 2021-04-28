@@ -1,5 +1,5 @@
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { Button, Col, Form, Input, message as msg, Row } from "antd";
+import { UserOutlined, LockOutlined, LoginOutlined } from "@ant-design/icons";
+import { Button, Form, Input, message as msg, Divider } from "antd";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
@@ -19,7 +19,6 @@ const Login = () => {
   const { auth, errors } = authState;
   useEffect(() => {
     if (errors.results) {
-      // dispatch error
       msg.error(errors.results.message);
       dispatch(clearAuthError());
     }
@@ -38,66 +37,69 @@ const Login = () => {
   };
 
   return (
-    <div className="login-form">
-      <Row gutter={[8, 8]}>
-        <Col span={12}>
-          <img
-            src="https://i.pinimg.com/originals/36/81/8e/36818e816a888a56855d12bb5232b624.png"
-            alt="poveety"
-          />
-        </Col>
-
-        <Col span={12}>
-          <Form
-            name="normal_login"
-            className="login-form"
-            initialValues={{ remember: true }}
-            onFinish={onFinish}
+    <>
+      <div className="form">
+        <Form
+          name="normal_login"
+          initialValues={{
+            remember: true,
+          }}
+          onFinish={onFinish}
+        >
+          <h2>
+            Log In
+            <LoginOutlined />
+          </h2>
+          <Form.Item
+            name="email"
+            rules={[
+              {
+                required: true,
+                message: "Please input your E-mail ID!",
+              },
+            ]}
           >
-            <h1 className="l-heading">
-              <span className="text-primary">Login</span> Form
-            </h1>
-            <p>Please fill out the form below</p>
-            <Form.Item
-              name="email"
-              label="Email"
-              rules={[{ required: true, message: "Please input your Email!" }]}
+            <Input
+              prefix={<UserOutlined className="site-form-item-icon" />}
+              placeholder="Email ID"
+            />
+          </Form.Item>
+          <Form.Item
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: "Please input your Password!",
+              },
+            ]}
+          >
+            <Input.Password
+              prefix={<LockOutlined className="site-form-item-icon" />}
+              type="password"
+              placeholder="Password"
+            />
+          </Form.Item>
+          <Form.Item>
+            <Button
+              type="primary"
+              size="large"
+              htmlType="submit"
+              className="login-form-button"
+              block
             >
-              <Input
-                prefix={<UserOutlined className="site-form-item-icon" />}
-                placeholder="Username"
-              />
-            </Form.Item>
-            <Form.Item
-              name="password"
-              label="Password"
-              rules={[
-                { required: true, message: "Please input your Password!" },
-              ]}
-            >
-              <Input
-                prefix={<LockOutlined className="site-form-item-icon" />}
-                type="password"
-                placeholder="Password"
-              />
-            </Form.Item>
-
-            <Form.Item>
-              <Button
-                type="primary"
-                htmlType="submit"
-                className="login-form-button"
-              >
-                Log in
-              </Button>
-              <br />
-              Or <br />
-              <Link to="/register">Register</Link>
-            </Form.Item>
-          </Form>
-        </Col>
-      </Row>
-    </div>
+              <LoginOutlined />
+              Log in
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
+      <div className="option">
+        <Divider />
+        <Link to="/register">
+          <Button type="link">Don't have an account? Register here</Button>
+        </Link>
+      </div>
+    </>
   );
 };
 
