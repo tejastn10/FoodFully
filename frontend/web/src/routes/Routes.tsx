@@ -5,6 +5,8 @@ import Register from "../containers/auth/Register";
 import About from "../components/About";
 import Landing from "../containers/landing/Landing";
 import Contact from "../components/Contact";
+import NotFound from "../components/404NotFound";
+import Profile from "../containers/auth/Profile";
 
 export const Routes = () => {
   return (
@@ -14,6 +16,8 @@ export const Routes = () => {
       <Route exact path="/register" component={Register} />
       <Route exact path="/about" component={About} />
       <Route exact path="/contact" component={Contact} />
+      <Route exact path="/profile" component={Profile} />
+      <Route path="*" component={NotFound} />
     </Switch>
   );
 };
