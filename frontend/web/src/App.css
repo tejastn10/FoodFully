@@ -110,13 +110,24 @@
   font-weight: bold;
 }
 
-.ant-form > h2 {
+.form > h2 {
   font-size: 2rem;
+  font-weight: bold;
+}
+
+.form > h3 {
+  font-size: 1.2rem;
   font-weight: bold;
 }
 
 .ant-row {
   padding-bottom: 2%;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.ant-card-actions > li {
+  margin: 0;
 }
 
 .option {
@@ -130,4 +141,13 @@
 
 .card {
   margin: 5%;
+}
+
+.nearby {
+  padding: 2rem 0;
+}
+
+.nearby > h3 {
+  font-size: 1rem;
+  font-weight: bold;
 }
