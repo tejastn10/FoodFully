@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Button, message } from "antd";
+import { Button, message, Menu } from "antd";
 import { LogoutOutlined } from "@ant-design/icons";
 import { logoutUser } from "../../store/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,29 +18,33 @@ export const Navbar = () => {
     dispatch(logoutUser());
   };
   return (
-    <nav id="navbar">
-      <div className="container">
-        <img src={"../FF.jpg"} alt="logo" className="logo" />
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/contact">Contact Us</Link>
-          </li>
-          {authState.auth ? (
-            <li>
-              <Button type="primary" onClick={logout}>
-                <LogoutOutlined />
-                Logout
-              </Button>
-            </li>
-          ) : null}
-        </ul>
-      </div>
-    </nav>
+    <div className="header">
+      <Link to="/">
+        <div className="logo">FoodFully</div>
+      </Link>
+      <Menu
+        className="nav"
+        theme="dark"
+        mode="horizontal"
+        defaultSelectedKeys={["1"]}
+      >
+        <Menu.Item key="1">
+          <Link to="/">Home</Link>
+        </Menu.Item>
+        <Menu.Item key="2">
+          <Link to="/about">About</Link>
+        </Menu.Item>
+        <Menu.Item key="3">
+          <Link to="/contact">Contact Us</Link>
+        </Menu.Item>
+
+        {authState.auth ? (
+          <Button type="primary" onClick={logout}>
+            <LogoutOutlined />
+            Logout
+          </Button>
+        ) : null}
+      </Menu>
+    </div>
   );
 };
