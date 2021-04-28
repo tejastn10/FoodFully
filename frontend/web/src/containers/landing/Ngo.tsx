@@ -1,48 +1,121 @@
-import { Button, Col, Form, Input, Row } from "antd";
+import { Button, Col, Row, Divider, Card, Alert, List } from "antd";
+import { TeamOutlined, LikeOutlined, DislikeOutlined } from "@ant-design/icons";
+import { useState } from "react";
+import Feedback from "./Feedback";
 
 const Ngo = () => {
-  const onFinish = (values: any) => {
-    console.log("Received values of form: ", values);
-  };
+  const [visible, setVisible] = useState(true);
+
+  const data = [{ title: "asdasd" }, { title: "asdasd" }, { title: "asdasd" }];
+
+  // const onFinish = (values: any) => {
+  //   console.log("Received values of form: ", values);
+  // };
 
   return (
-    <div className="login-form">
-      <Row>
-        <Col span={12}>
-          <div className="hotelform">
-            <h2>For Hotel's Notification</h2>
-            <Form>
-              <h2>NGO</h2>
-              {/* initialValues={{remember: true}} */}
-              <Form.Item
-                label="Quantity"
-                name="Quantity"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please Enter the Quantity of the food.",
-                  },
+    <>
+      <Feedback visible={visible} setVisible={setVisible} />
+      <Row gutter={16}>
+        <Col span={16}>
+          <div className="form">
+            <h2>
+              <TeamOutlined />
+              NGO's Name
+            </h2>
+            <h3>Recent Donations</h3>
+            <Alert
+              message="No Recent Donations"
+              description="YOu will be notified once we receive a donataion."
+              type="info"
+              showIcon
+            />
+            <Card
+              style={{ marginBottom: "1rem" }}
+              actions={[
+                <Button type="primary" block size="large">
+                  <LikeOutlined key="accept" />
+                </Button>,
+                <Button type="primary" danger block size="large">
+                  <DislikeOutlined key="setting" />
+                </Button>,
+              ]}
+            >
+              <Card.Meta
+                title="Hotels name"
+                description={[
+                  <p>Description</p>,
+                  <p>Quantity</p>,
+                  <p>best before</p>,
                 ]}
-              >
-                <Input />
-              </Form.Item>
-
-              <Form.Item label="Description" name="Description">
-                <Input.TextArea />
-              </Form.Item>
-
-              <Form.Item>
-                <Button type="primary">Accept</Button>
-              </Form.Item>
-
-              <Form.Item>
-                <Button type="primary">Decline</Button>
-              </Form.Item>
-            </Form>
+              />
+            </Card>
+            <Card
+              style={{ marginBottom: "1rem" }}
+              actions={[
+                <Button type="primary" block size="large">
+                  <LikeOutlined key="accept" />
+                </Button>,
+                <Button type="primary" danger block size="large">
+                  <DislikeOutlined key="setting" />
+                </Button>,
+              ]}
+            >
+              <Card.Meta
+                title="Hotels name"
+                description={[
+                  <p>Description</p>,
+                  <p>Quantity</p>,
+                  <p>best before</p>,
+                ]}
+              />
+            </Card>
+            <Card
+              style={{ marginBottom: "1rem" }}
+              actions={[
+                <Button type="primary" block size="large">
+                  <LikeOutlined key="accept" />
+                </Button>,
+                <Button type="primary" danger block size="large">
+                  <DislikeOutlined key="setting" />
+                </Button>,
+              ]}
+            >
+              <Card.Meta
+                title="Hotels name"
+                description={[
+                  <p>Description</p>,
+                  <p>Quantity</p>,
+                  <p>best before</p>,
+                ]}
+              />
+            </Card>
+          </div>
+        </Col>
+        <Col span={1}>
+          <Divider
+            type="vertical"
+            style={{ marginTop: "1.2rem", height: "100%" }}
+          />
+        </Col>
+        <Col span={6}>
+          <div className="nearby">
+            <h3>Nearby Hotels's</h3>
+            <List
+              itemLayout="horizontal"
+              dataSource={data}
+              renderItem={(item) => (
+                <List.Item>
+                  <List.Item.Meta
+                    title={item.title}
+                    description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                  />
+                </List.Item>
+              )}
+            />
           </div>
         </Col>
       </Row>
-    </div>
+    </>
   );
 };
 
