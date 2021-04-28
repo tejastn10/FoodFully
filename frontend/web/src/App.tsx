@@ -5,7 +5,7 @@ import "./App.css";
 
 import { Navbar } from "./containers/auth/Nav";
 import { Footer } from "./components/Footer";
-import { Routes } from "./routes/routes";
+import { Routes } from "./routes/Routes";
 
 const App = () => {
   return (

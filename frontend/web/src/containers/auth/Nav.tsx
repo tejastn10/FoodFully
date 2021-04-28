@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 import { Button, message, Menu } from "antd";
-import { LogoutOutlined } from "@ant-design/icons";
+import {
+  LogoutOutlined,
+  UserOutlined,
+  SolutionOutlined,
+  VerifiedOutlined,
+} from "@ant-design/icons";
 import { logoutUser } from "../../store/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { ApplicationState } from "../../store/store";
@@ -39,10 +44,28 @@ export const Navbar = () => {
         </Menu.Item>
 
         {authState.auth ? (
-          <Button type="primary" onClick={logout}>
-            <LogoutOutlined />
-            Logout
-          </Button>
+          <>
+            <Menu.SubMenu key="sub1" icon={<UserOutlined />} title="User">
+              <Menu.Item key="4">
+                <Link to="/profile">
+                  <SolutionOutlined />
+                  Profile
+                </Link>
+              </Menu.Item>
+              {authState.auth?.isNgo ? (
+                <Menu.Item key="5">
+                  <Link to="/admin">
+                    <VerifiedOutlined />
+                    Admin Panel
+                  </Link>
+                </Menu.Item>
+              ) : null}
+            </Menu.SubMenu>
+            <Button type="primary" onClick={logout}>
+              <LogoutOutlined />
+              Logout
+            </Button>
+          </>
         ) : null}
       </Menu>
     </div>
