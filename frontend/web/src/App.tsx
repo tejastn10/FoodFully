@@ -1,6 +1,8 @@
 import { BrowserRouter } from "react-router-dom";
 import { Layout } from "antd";
 
+import "./App.css";
+
 import { Navbar } from "./containers/auth/Nav";
 import { Footer } from "./components/Footer";
 import { Routes } from "./routes/routes";
