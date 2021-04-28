@@ -25,12 +25,10 @@ const Login = () => {
   }, [dispatch, errors.results]);
 
   useEffect(() => {
-    if (auth?.isNgo === false) {
-      history.replace("/hotel");
-    } else if (auth?.isNgo === true) {
-      history.replace("/ngo");
+    if (auth) {
+      history.replace("/");
     }
-  }, [history, auth?.isNgo]);
+  }, [history, auth]);
 
   const onFinish = ({ email, password }: submitProps) => {
     dispatch(loginAuthRequest({ email, password }));
@@ -38,13 +36,14 @@ const Login = () => {
 
   return (
     <>
-      <div className="form">
+      <div>
         <Form
           name="normal_login"
           initialValues={{
             remember: true,
           }}
           onFinish={onFinish}
+          className="form"
         >
           <h2>
             Log In
