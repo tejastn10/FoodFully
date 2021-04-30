@@ -8,7 +8,6 @@ import {
   registerAuthError,
   clearAuthError,
 } from "./auth";
-
 import {
   nearbyHotelRequest,
   nearbyHotelSuccess,
@@ -18,6 +17,15 @@ import {
   nearbyNGOError,
   clearNearby,
 } from "./nearby";
+import {
+  getProfileRequest,
+  getProfileSuccess,
+  getProfileError,
+  updateProfileRequest,
+  updateProfileSuccess,
+  updateProfileError,
+  clearProfile,
+} from "./profile";
 
 export {
   loginAuthRequest,
@@ -35,4 +43,11 @@ export {
   nearbyNGOSuccess,
   nearbyNGOError,
   clearNearby,
+  getProfileRequest,
+  getProfileSuccess,
+  getProfileError,
+  updateProfileRequest,
+  updateProfileSuccess,
+  updateProfileError,
+  clearProfile,
 };
