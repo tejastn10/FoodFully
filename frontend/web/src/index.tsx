@@ -6,10 +6,11 @@ import reportWebVitals from "./reportWebVitals";
 
 import { Provider } from "react-redux";
 import { ApplicationState, configureAppStore } from "./store/store";
-import { AuthInitialState } from "./store/reducer/reducer";
+import { AuthInitialState, NearbyInitialState } from "./store/reducer/reducer";
 
 const initialState: ApplicationState = {
   auth: AuthInitialState,
+  nearby: NearbyInitialState,
 };
 const store = configureAppStore(initialState);
 
