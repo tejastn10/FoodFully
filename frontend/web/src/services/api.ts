@@ -30,3 +30,15 @@ export const getNGOs: any = () => {
 
   return API.get(URL);
 };
+
+export const fetchUserProfile: any = () => {
+  const URL = `${API_ENDPOINT}/api/users/profile`;
+
+  return API.get(URL);
+};
+
+export const updateUserProfile: any = ({ contact, password }: any) => {
+  const URL = `${API_ENDPOINT}/api/users/profile`;
+
+  return API.put(URL, { contact, password });
+};
