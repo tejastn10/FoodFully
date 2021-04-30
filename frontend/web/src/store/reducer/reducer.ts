@@ -1,8 +1,10 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import { AuthStateReducer, AuthInitialState } from "./auth";
+import { NearbyStateReducer, NearbyInitialState } from "./nearby";
 
 const reducers = {
   auth: AuthStateReducer,
+  nearby: NearbyStateReducer,
 };
 
 export const rootReducer = () => {
@@ -10,4 +12,4 @@ export const rootReducer = () => {
   return reducer;
 };
 
-export { AuthInitialState };
+export { AuthInitialState, NearbyInitialState };
