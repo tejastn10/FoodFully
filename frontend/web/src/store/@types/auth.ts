@@ -4,6 +4,7 @@ export interface Auth {
   _id: string;
   name: string;
   isNgo: boolean;
+  isAdmin: boolean;
   token: string;
 }
 
