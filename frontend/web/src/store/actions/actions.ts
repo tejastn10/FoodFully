@@ -9,6 +9,16 @@ import {
   clearAuthError,
 } from "./auth";
 
+import {
+  nearbyHotelRequest,
+  nearbyHotelSuccess,
+  nearbyHotelError,
+  nearbyNGORequest,
+  nearbyNGOSuccess,
+  nearbyNGOError,
+  clearNearby,
+} from "./nearby";
+
 export {
   loginAuthRequest,
   loginAuthSuccess,
@@ -18,4 +28,11 @@ export {
   registerAuthSuccess,
   registerAuthError,
   clearAuthError,
+  nearbyHotelRequest,
+  nearbyHotelSuccess,
+  nearbyHotelError,
+  nearbyNGORequest,
+  nearbyNGOSuccess,
+  nearbyNGOError,
+  clearNearby,
 };
