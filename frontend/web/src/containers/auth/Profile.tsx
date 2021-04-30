@@ -1,4 +1,4 @@
-// import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import {
@@ -10,6 +10,8 @@ import {
   Button,
   Tabs,
   Descriptions,
+  message,
+  Spin,
 } from "antd";
 import {
   UserOutlined,
@@ -17,19 +19,101 @@ import {
   LockOutlined,
   UserSwitchOutlined,
 } from "@ant-design/icons";
+import { useEffect, useState } from "react";
+import { ApplicationState } from "../../store/store";
+import { AuthState, ProfileState } from "../../store/@types";
+import {
+  getProfileRequest,
+  updateProfileRequest,
+} from "../../store/actions/actions";
+
+type validationStatus = "success" | "error" | "validating";
+type submitProps = {
+  contact?: string;
+  password?: string;
+  password2?: string;
+};
 
 const Profile = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const history = useHistory();
+  const [validationStatus, setValidationStatus] = useState<validationStatus>(
+    "success"
+  );
+  const [feedback, setFeedback] = useState(false);
 
-  return (
+  const authState = useSelector<ApplicationState, AuthState>(
+    (state) => state.auth
+  );
+
+  const profileState = useSelector<ApplicationState, ProfileState>(
+    (state) => state.profile
+  );
+
+  const { auth } = authState;
+  const { profile, isLoading, errors } = profileState;
+
+  useEffect(() => {
+    if (errors.results) {
+      message.error(errors.results.message);
+      setValidationStatus("error");
+      setFeedback(true);
+    }
+  }, [errors.results]);
+
+  useEffect(() => {
+    if (!auth) {
+      history.push("/login");
+    } else {
+      if (!profile) {
+        dispatch(getProfileRequest());
+      }
+    }
+  }, [history, auth, dispatch, profile]);
+
+  useEffect(() => {
+    if (isLoading) {
+      setValidationStatus("validating");
+      setFeedback(true);
+    } else if (!isLoading) {
+      setValidationStatus("success");
+      setFeedback(true);
+      setTimeout(() => {
+        setFeedback(false);
+      }, 2000);
+    }
+  }, [isLoading]);
+
+  const onFinish = ({ contact, password, password2 }: submitProps) => {
+    if (password !== password2) {
+      message.error("Passwords do not match!");
+    } else {
+      dispatch(updateProfileRequest({ contact, password }));
+      if (isLoading) {
+        setValidationStatus("validating");
+        console.log(validationStatus);
+        setFeedback(true);
+      } else {
+        setValidationStatus("success");
+        setFeedback(true);
+      }
+    }
+  };
+
+  return isLoading ? (
+    <div className="loading">
+      <Spin />
+    </div>
+  ) : profile === null ? (
+    <></>
+  ) : (
     <div className="container">
       <Card>
         <PageHeader
           className="site-page-header-responsive"
           onBack={() => history.goBack()}
-          title="Organizations Name"
-          subTitle="Ngo or hotel"
+          title={profile.name}
+          subTitle={profile.isAdmin ? "Admin" : profile.isNgo ? "NGO" : "Hotel"}
           footer={
             <Tabs defaultActiveKey="1" centered>
               <Tabs.TabPane tab="Details" key="1">
@@ -38,16 +122,41 @@ const Profile = () => {
                     className="profile form"
                     name="basic"
                     initialValues={{
-                      // name: `${profile.name}`,
-                      // email: `${profile.email}`,
+                      name: `${profile.name}`,
+                      email: `${profile.email}`,
+                      contact: `${profile.contact}`,
                       remember: true,
                     }}
-                    // onFinish={onFinish}
+                    onFinish={onFinish}
                   >
                     <Form.Item
                       name="name"
-                      // hasFeedback={feedback}
-                      // validateStatus={validationStatus as any}
+                      hasFeedback={feedback}
+                      validateStatus={validationStatus as any}
+                    >
+                      <Input
+                        disabled
+                        prefix={
+                          <UserOutlined className="site-form-item-icon" />
+                        }
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      name="email"
+                      hasFeedback={feedback}
+                      validateStatus={validationStatus as any}
+                    >
+                      <Input
+                        disabled
+                        prefix={
+                          <MailOutlined className="site-form-item-icon" />
+                        }
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      name="contact"
+                      hasFeedback={feedback}
+                      validateStatus={validationStatus as any}
                     >
                       <Input
                         prefix={
@@ -56,20 +165,9 @@ const Profile = () => {
                       />
                     </Form.Item>
                     <Form.Item
-                      name="email"
-                      // hasFeedback={feedback}
-                      // validateStatus={validationStatus as any}
-                    >
-                      <Input
-                        prefix={
-                          <MailOutlined className="site-form-item-icon" />
-                        }
-                      />
-                    </Form.Item>
-                    <Form.Item
                       name="password"
-                      // hasFeedback={feedback}
-                      // validateStatus={validationStatus as any}
+                      hasFeedback={feedback}
+                      validateStatus={validationStatus as any}
                     >
                       <Input.Password
                         prefix={
@@ -81,8 +179,8 @@ const Profile = () => {
                     </Form.Item>
                     <Form.Item
                       name="password2"
-                      // hasFeedback={feedback}
-                      // validateStatus={validationStatus as any}
+                      hasFeedback={feedback}
+                      validateStatus={validationStatus as any}
                     >
                       <Input.Password
                         prefix={
@@ -117,17 +215,16 @@ const Profile = () => {
             </Tabs>
           }
         >
-          <Descriptions size="small">
-            <Descriptions.Item label="Created">Lili Qu</Descriptions.Item>
-            <Descriptions.Item label="Association">421421</Descriptions.Item>
-            <Descriptions.Item label="Creation Time">
-              2017-01-10
+          <Descriptions>
+            <Descriptions.Item label="Contact">
+              {profile.contact}
             </Descriptions.Item>
-            <Descriptions.Item label="Effective Time">
-              2017-10-10
-            </Descriptions.Item>
-            <Descriptions.Item label="Remarks">
-              Gonghu Road, Xihu District, Hangzhou, Zhejiang, China
+            <Descriptions.Item label="Email">{profile.email}</Descriptions.Item>
+          </Descriptions>
+          <Descriptions>
+            <Descriptions.Item label="Address">
+              {profile.address.street}, {profile.address.city},{" "}
+              {profile.address.state} - {profile.address.pincode}
             </Descriptions.Item>
           </Descriptions>
         </PageHeader>
