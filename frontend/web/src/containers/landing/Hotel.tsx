@@ -1,4 +1,15 @@
-import { Button, Col, Form, Input, Row, Divider, List } from "antd";
+import {
+  Button,
+  Col,
+  Form,
+  Input,
+  Row,
+  Divider,
+  List,
+  message,
+  Spin,
+  Empty,
+} from "antd";
 import {
   NumberOutlined,
   ShopOutlined,
@@ -6,10 +17,15 @@ import {
   BellOutlined,
   SoundOutlined,
 } from "@ant-design/icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Feedback from "./Feedback";
+import { NearbyState } from "../../store/@types";
+import { ApplicationState } from "../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { nearbyNGORequest } from "../../store/actions/actions";
 
 const Hotel = () => {
+  const dispatch = useDispatch();
   const [visible, setVisible] = useState(true);
   const [urgent, setUrgent] = useState(false);
 
@@ -18,7 +34,24 @@ const Hotel = () => {
     console.log("Received values of form: ", urgent);
   };
 
-  const data = [{ title: "asdasd" }, { title: "asdasd" }, { title: "asdasd" }];
+  const nearbyState = useSelector<ApplicationState, NearbyState>(
+    (state) => state.nearby
+  );
+
+  const { isLoading, errors, nearbyUsers } = nearbyState;
+
+  useEffect(() => {
+    if (nearbyUsers === null || nearbyUsers.length === 0) {
+      message.info("Fetching Nearby NGOs...");
+      dispatch(nearbyNGORequest());
+    }
+  }, [dispatch, nearbyUsers]);
+
+  useEffect(() => {
+    if (errors.results) {
+      message.error(errors.results.message);
+    }
+  }, [dispatch, errors.results]);
 
   return (
     <>
@@ -110,18 +143,35 @@ const Hotel = () => {
         <Col span={6}>
           <div className="nearby">
             <h3>Nearby NGO's</h3>
-            <List
-              itemLayout="horizontal"
-              dataSource={data}
-              renderItem={(item) => (
-                <List.Item>
-                  <List.Item.Meta
-                    title={item.title}
-                    description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-                  />
-                </List.Item>
-              )}
-            />
+            {isLoading ? (
+              <div className="loading">
+                <Spin />
+              </div>
+            ) : nearbyUsers === null || nearbyUsers.length === 0 ? (
+              <Empty description="No nearby NGOs found" />
+            ) : (
+              <List
+                itemLayout="horizontal"
+                pagination={{
+                  pageSize: 3,
+                }}
+                dataSource={nearbyUsers!}
+                renderItem={(item) => (
+                  <List.Item>
+                    <List.Item.Meta
+                      title={item.name}
+                      description={[
+                        <p>{item.contact}</p>,
+                        <p>
+                          {item.address.street}, {item.address.city} <br />
+                          {item.address.state}
+                        </p>,
+                      ]}
+                    />
+                  </List.Item>
+                )}
+              />
+            )}
           </div>
         </Col>
       </Row>

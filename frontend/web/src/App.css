@@ -151,3 +151,10 @@
   font-size: 1rem;
   font-weight: bold;
 }
+
+.loading {
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
