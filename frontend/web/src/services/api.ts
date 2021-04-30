@@ -18,3 +18,15 @@ export const registerUser: any = (value: any) => {
 
   return API.post(URL, value);
 };
+
+export const getHotels: any = () => {
+  const URL = `${API_ENDPOINT}/api/nearby/hotel`;
+
+  return API.get(URL);
+};
+
+export const getNGOs: any = () => {
+  const URL = `${API_ENDPOINT}/api/nearby/ngo`;
+
+  return API.get(URL);
+};
