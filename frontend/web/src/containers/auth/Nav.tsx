@@ -46,7 +46,7 @@ export const Navbar = () => {
 
         {authState.auth ? (
           <>
-            <Menu.SubMenu key="sub1" icon={<UserOutlined />} title="User">
+            <Menu.SubMenu key="sub1" icon={<UserOutlined />} title="Account">
               <Menu.Item key="4">
                 <Link to="/profile">
                   <SolutionOutlined />
