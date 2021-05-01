@@ -26,6 +26,12 @@ import {
   updateProfileError,
   clearProfile,
 } from "./profile";
+import {
+  donationRequest,
+  donationSuccess,
+  donationError,
+  clearDonation,
+} from "./donation";
 
 export {
   loginAuthRequest,
@@ -50,4 +56,8 @@ export {
   updateProfileSuccess,
   updateProfileError,
   clearProfile,
+  donationRequest,
+  donationSuccess,
+  donationError,
+  clearDonation,
 };
