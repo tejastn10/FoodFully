@@ -4,12 +4,13 @@ import { createInjectorsEnhancer } from "redux-injectors";
 
 import { rootReducer } from "./reducer/reducer";
 import { rootSaga } from "./sagas/saga";
-import { AuthState, NearbyState, ProfileState } from "./@types";
+import { AuthState, DonationState, NearbyState, ProfileState } from "./@types";
 
 export type ApplicationState = {
   auth: AuthState;
   nearby: NearbyState;
   profile: ProfileState;
+  donation: DonationState;
 };
 
 export const configureAppStore = (initialState: ApplicationState) => {

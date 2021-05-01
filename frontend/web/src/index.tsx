@@ -10,12 +10,14 @@ import {
   AuthInitialState,
   NearbyInitialState,
   ProfileInitialState,
+  DonationInitialState,
 } from "./store/reducer/reducer";
 
 const initialState: ApplicationState = {
   auth: AuthInitialState,
   nearby: NearbyInitialState,
   profile: ProfileInitialState,
+  donation: DonationInitialState,
 };
 const store = configureAppStore(initialState);
 
