@@ -11,6 +11,7 @@ import {
   NearbyInitialState,
   ProfileInitialState,
   DonationInitialState,
+  OrderInitialState,
 } from "./store/reducer/reducer";
 
 const initialState: ApplicationState = {
@@ -18,6 +19,7 @@ const initialState: ApplicationState = {
   nearby: NearbyInitialState,
   profile: ProfileInitialState,
   donation: DonationInitialState,
+  order: OrderInitialState,
 };
 const store = configureAppStore(initialState);
 
