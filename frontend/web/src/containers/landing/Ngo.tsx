@@ -13,21 +13,24 @@ import {
 import { useEffect, useState } from "react";
 import { TeamOutlined, LikeOutlined } from "@ant-design/icons";
 import Feedback from "./Feedback";
-import { AuthState, DonationState, NearbyState } from "../../store/@types";
+import {
+  AuthState,
+  DonationState,
+  NearbyState,
+  OrderState,
+} from "../../store/@types";
 import { ApplicationState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  clearOrder,
   nearbyHotelRequest,
+  orderRequest,
   recentDonationRequest,
 } from "../../store/actions/actions";
 
 const Ngo = () => {
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
-
-  // const onFinish = (values: any) => {
-  //   console.log("Received values of form: ", values);
-  // };
 
   const authState = useSelector<ApplicationState, AuthState>(
     (state) => state.auth
@@ -38,9 +41,13 @@ const Ngo = () => {
   const nearbyState = useSelector<ApplicationState, NearbyState>(
     (state) => state.nearby
   );
+  const orderState = useSelector<ApplicationState, OrderState>(
+    (state) => state.order
+  );
 
   const { isLoading, errors, nearbyUsers } = nearbyState;
   const { donations, errors: dErrors } = donationState;
+  const { order, errors: oErrors } = orderState;
 
   useEffect(() => {
     if (nearbyUsers === null || nearbyUsers.length === 0) {
@@ -66,9 +73,32 @@ const Ngo = () => {
     }
   }, [dispatch, dErrors.results]);
 
+  useEffect(() => {
+    if (order) {
+      setVisible(true);
+      setTimeout(() => {
+        setVisible(false);
+        dispatch(clearOrder());
+      }, 5000);
+    }
+  }, [dispatch, order]);
+
+  useEffect(() => {
+    if (oErrors.results) {
+      message.error(oErrors.results.message);
+    }
+  }, [dispatch, oErrors.results]);
+
+  const onFinish = (donationId: string) => {
+    dispatch(orderRequest(donationId));
+    setTimeout(() => {
+      dispatch(recentDonationRequest());
+    }, 4000);
+  };
+
   return (
     <>
-      <Feedback visible={visible} setVisible={setVisible} isNgo />
+      <Feedback visible={visible} setVisible={setVisible} isNgo order={order} />
       <Row gutter={16}>
         <Col span={16}>
           <div className="form">
@@ -85,9 +115,6 @@ const Ngo = () => {
                 showIcon
               />
             ) : (
-              // (
-              //   donations?.map((donation) => <div>{donation.hotel}</div>)
-              // )
               <List
                 dataSource={donations}
                 pagination={{
@@ -113,6 +140,7 @@ const Ngo = () => {
                             block
                             size="large"
                             danger={donation.isUrgent}
+                            onClick={() => onFinish(donation._id)}
                           >
                             <LikeOutlined key="accept" /> Accept Donation
                           </Button>,
