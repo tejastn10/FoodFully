@@ -59,3 +59,9 @@ export const getRecentDonations: any = () => {
 
   return API.get(URL);
 };
+
+export const order: any = (donationID: any) => {
+  const URL = `${API_ENDPOINT}/api/order`;
+
+  return API.post(URL, { donationID });
+};
