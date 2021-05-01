@@ -42,3 +42,14 @@ export const updateUserProfile: any = ({ contact, password }: any) => {
 
   return API.put(URL, { contact, password });
 };
+
+export const donate: any = ({
+  isUrgent,
+  quantity,
+  description,
+  bestBefore,
+}: any) => {
+  const URL = `${API_ENDPOINT}/api/donation`;
+
+  return API.post(URL, { isUrgent, quantity, description, bestBefore });
+};
