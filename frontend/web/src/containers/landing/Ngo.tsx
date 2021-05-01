@@ -11,33 +11,48 @@ import {
   Alert,
 } from "antd";
 import { useEffect, useState } from "react";
-import { TeamOutlined, LikeOutlined, DislikeOutlined } from "@ant-design/icons";
+import { TeamOutlined, LikeOutlined } from "@ant-design/icons";
 import Feedback from "./Feedback";
-import { NearbyState } from "../../store/@types";
+import { AuthState, DonationState, NearbyState } from "../../store/@types";
 import { ApplicationState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { nearbyHotelRequest } from "../../store/actions/actions";
+import {
+  nearbyHotelRequest,
+  recentDonationRequest,
+} from "../../store/actions/actions";
 
 const Ngo = () => {
   const dispatch = useDispatch();
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
 
   // const onFinish = (values: any) => {
   //   console.log("Received values of form: ", values);
   // };
 
+  const authState = useSelector<ApplicationState, AuthState>(
+    (state) => state.auth
+  );
+  const donationState = useSelector<ApplicationState, DonationState>(
+    (state) => state.donation
+  );
   const nearbyState = useSelector<ApplicationState, NearbyState>(
     (state) => state.nearby
   );
 
   const { isLoading, errors, nearbyUsers } = nearbyState;
+  const { donations, errors: dErrors } = donationState;
 
   useEffect(() => {
     if (nearbyUsers === null || nearbyUsers.length === 0) {
-      message.info("Fetching Nearby Hotels...");
       dispatch(nearbyHotelRequest());
     }
   }, [dispatch, nearbyUsers]);
+
+  useEffect(() => {
+    if (donations === null || donations?.length === 0) {
+      dispatch(recentDonationRequest());
+    }
+  }, [dispatch, donations]);
 
   useEffect(() => {
     if (errors.results) {
@@ -45,83 +60,78 @@ const Ngo = () => {
     }
   }, [dispatch, errors.results]);
 
+  useEffect(() => {
+    if (dErrors.results) {
+      message.error(dErrors.results.message);
+    }
+  }, [dispatch, dErrors.results]);
+
   return (
     <>
-      <Feedback visible={visible} setVisible={setVisible} />
+      <Feedback visible={visible} setVisible={setVisible} isNgo />
       <Row gutter={16}>
         <Col span={16}>
           <div className="form">
             <h2>
               <TeamOutlined />
-              NGO's Name
+              {authState.auth?.name}
             </h2>
             <h3>Recent Donations</h3>
-            <Alert
-              message="No Recent Donations"
-              description="YOu will be notified once we receive a donataion."
-              type="info"
-              showIcon
-            />
-            <Card
-              style={{ marginBottom: "1rem" }}
-              actions={[
-                <Button type="primary" block size="large">
-                  <LikeOutlined key="accept" />
-                </Button>,
-                <Button type="primary" danger block size="large">
-                  <DislikeOutlined key="setting" />
-                </Button>,
-              ]}
-            >
-              <Card.Meta
-                title="Hotels name"
-                description={[
-                  <p>Description</p>,
-                  <p>Quantity</p>,
-                  <p>best before</p>,
-                ]}
+            {donations === null || donations?.length === 0 ? (
+              <Alert
+                message="No Recent Donations"
+                description="YOu will be notified once we receive a donataion."
+                type="info"
+                showIcon
               />
-            </Card>
-            <Card
-              style={{ marginBottom: "1rem" }}
-              actions={[
-                <Button type="primary" block size="large">
-                  <LikeOutlined key="accept" />
-                </Button>,
-                <Button type="primary" danger block size="large">
-                  <DislikeOutlined key="setting" />
-                </Button>,
-              ]}
-            >
-              <Card.Meta
-                title="Hotels name"
-                description={[
-                  <p>Description</p>,
-                  <p>Quantity</p>,
-                  <p>best before</p>,
-                ]}
+            ) : (
+              // (
+              //   donations?.map((donation) => <div>{donation.hotel}</div>)
+              // )
+              <List
+                dataSource={donations}
+                pagination={{
+                  pageSize: 2,
+                }}
+                renderItem={(donation) => (
+                  <>
+                    <List.Item>
+                      <Card
+                        className="donation-list"
+                        style={
+                          donation.isUrgent
+                            ? {
+                                marginBottom: "1rem",
+                                width: "100%",
+                                border: "1px solid #ff7875",
+                              }
+                            : { marginBottom: "1rem", width: "100%" }
+                        }
+                        actions={[
+                          <Button
+                            type="primary"
+                            block
+                            size="large"
+                            danger={donation.isUrgent}
+                          >
+                            <LikeOutlined key="accept" /> Accept Donation
+                          </Button>,
+                        ]}
+                      >
+                        <Card.Meta
+                          title={donation.hotel.name}
+                          description={[
+                            <p>Description: {donation.description}</p>,
+                            <p>Quantity: {donation.quantity}</p>,
+                            <p>Best before: {donation.bestBefore}</p>,
+                          ]}
+                        />
+                      </Card>
+                    </List.Item>
+                  </>
+                )}
               />
-            </Card>
-            <Card
-              style={{ marginBottom: "1rem" }}
-              actions={[
-                <Button type="primary" block size="large">
-                  <LikeOutlined key="accept" />
-                </Button>,
-                <Button type="primary" danger block size="large">
-                  <DislikeOutlined key="setting" />
-                </Button>,
-              ]}
-            >
-              <Card.Meta
-                title="Hotels name"
-                description={[
-                  <p>Description</p>,
-                  <p>Quantity</p>,
-                  <p>best before</p>,
-                ]}
-              />
-            </Card>
+            )}
           </div>
         </Col>
         <Col span={1}>
