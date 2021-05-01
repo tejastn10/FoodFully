@@ -24,3 +24,11 @@ export const postNewDonation = async (req: Request, res: Response) => {
     res.status(201).json(donation);
   }
 };
+
+export const getRecentDonations = async (req: Request, res: Response) => {
+  const donations = await Donation.find({});
+  const RecentDonations = donations.filter(
+    (donation) => donation.accepted === false
+  );
+  res.json(RecentDonations);
+};
