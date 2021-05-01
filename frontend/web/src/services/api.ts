@@ -18,3 +18,50 @@ export const registerUser: any = (value: any) => {
 
   return API.post(URL, value);
 };
+
+export const getHotels: any = () => {
+  const URL = `${API_ENDPOINT}/api/nearby/hotel`;
+
+  return API.get(URL);
+};
+
+export const getNGOs: any = () => {
+  const URL = `${API_ENDPOINT}/api/nearby/ngo`;
+
+  return API.get(URL);
+};
+
+export const fetchUserProfile: any = () => {
+  const URL = `${API_ENDPOINT}/api/users/profile`;
+
+  return API.get(URL);
+};
+
+export const updateUserProfile: any = ({ contact, password }: any) => {
+  const URL = `${API_ENDPOINT}/api/users/profile`;
+
+  return API.put(URL, { contact, password });
+};
+
+export const donate: any = ({
+  isUrgent,
+  quantity,
+  description,
+  bestBefore,
+}: any) => {
+  const URL = `${API_ENDPOINT}/api/donation`;
+
+  return API.post(URL, { isUrgent, quantity, description, bestBefore });
+};
+
+export const getRecentDonations: any = () => {
+  const URL = `${API_ENDPOINT}/api/donation`;
+
+  return API.get(URL);
+};
+
+export const order: any = (donationID: any) => {
+  const URL = `${API_ENDPOINT}/api/order`;
+
+  return API.post(URL, { donationID });
+};

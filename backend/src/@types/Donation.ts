@@ -1,12 +1,16 @@
 import { Document } from "mongoose";
 
 export interface IDonation extends Document {
-  hotel: string;
+  hotel: {
+    _id: String;
+    name: String;
+  };
   isUrgent: Boolean;
-  quantity: string;
-  description: string;
-  bestBefore: string;
+  quantity: String;
+  description: String;
+  bestBefore: String;
   donatedOn: Date;
   accepted: Boolean;
   acceptedOn: Date;
+  token: String;
 }

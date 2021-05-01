@@ -1,13 +1,17 @@
 import { Schema, model } from "mongoose";
-import { User } from "./User.Model";
 import { IDonation } from "../@types/Donation";
 
-const donationSchema = new Schema<IDonation>({
-  hotel: {
+const hotelSchema: Schema = new Schema({
+  _id: {
     type: Schema.Types.ObjectId,
     required: true,
-    ref: User,
+    ref: "User",
   },
+  name: { type: String, required: true },
+});
+
+const donationSchema = new Schema<IDonation>({
+  hotel: hotelSchema,
   isUrgent: {
     type: Boolean,
     required: true,
@@ -31,11 +35,14 @@ const donationSchema = new Schema<IDonation>({
   },
   accepted: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   acceptedOn: {
     type: Date,
-    default: Date.now(),
+    default: "",
+  },
+  token: {
+    type: String,
   },
 });
 

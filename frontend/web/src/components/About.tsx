@@ -1,64 +1,60 @@
+import { Avatar, Card, Divider } from "antd";
+
 const About = () => {
   return (
-    <div>
-      <section id="about-info" className="bg-light-py-3">
-        <div className="container">
-          <div className="info-left">
-            <h1 className="l-heading">
-              <span className="text-primary">About</span> Our Moto
-            </h1>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Explicabo sequi corporis distinctio atque corrupti iste quos ipsum
-              sunt nisi maiores qui incidunt veniam nobis nemo aliquam voluptas,
-              ratione delectus veritatis?
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat
-              commodi deserunt reiciendis? Laudantium, beatae sapiente? Mollitia
-              illum eveniet iste autem voluptatem saepe, ipsa ipsum sit magni ad
-              suscipit corrupti nostrum.
-            </p>
-          </div>
-          <div className="info-right">
-            <img
-              src="https://thumbs.dreamstime.com/b/foods-donate-holiday-food-drive-donation-christmas-charity-volunteers-collect-cardboard-box-aid-cans-groceries-vector-200001894.jpg"
-              alt="img"
-            />
-          </div>
-        </div>
-      </section>
-
-      <div className="clr"></div>
-
-      <section id="testimonials" className="py-3">
-        <div className="container">
-          <h2 className="l-heading">About Our Team</h2>
-          <div className="testimonial bg-primary">
-            <img src="" alt="Yadnesh" />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Necessitatibus non et delectus, eos moles
-            </p>
-          </div>
-
-          <div className="testimonial bg-primary">
-            <img src="" alt="Niraj" />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Necessitatibus non et delectus, eos moles
-            </p>
-          </div>
-
-          <div className="testimonial bg-primary">
-            <img src="" alt="Tejas" />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Necessitatibus non et delectus, eos moles
-            </p>
-          </div>
-        </div>
-      </section>
+    <div className="container">
+      <Divider>Our Motto</Divider>
+      <p>
+        We stand against hunger. It has proven a great threat to humanity. Our
+        Motto is that no one should be hungry, the basic necessity should be
+        fulfilled by each and every person on earth. For this we have taken
+        measures to ensure that we provide food in best conditions to each and
+        every person in our vicinity and help. But this cannot be the work of
+        one person, so we encourage all of you to join us in this journey.
+      </p>
+      <Card title="Our Team">
+        We are group of young individuals with a vision to see this World get
+        better.
+        <Divider orientation="left">
+          <Avatar
+            style={{
+              marginRight: "1rem",
+              color: "#f56a00",
+              backgroundColor: "#fde3cf",
+            }}
+          >
+            YD
+          </Avatar>
+          Yadnesh Chaudhari
+        </Divider>
+        <p>A cool and awesome guy willing to help others always.</p>
+        <Divider orientation="left">
+          <Avatar
+            style={{
+              marginRight: "1rem",
+              color: "#004b18",
+              backgroundColor: "#4ef87b",
+            }}
+          >
+            NR
+          </Avatar>
+          Niraj Rawat
+        </Divider>
+        <p>A cool and awesome guy willing to help others always.</p>
+        <Divider orientation="left">
+          <Avatar
+            style={{
+              marginRight: "1rem",
+              color: "#000068",
+              backgroundColor: "#9d9dff",
+            }}
+          >
+            TN
+          </Avatar>
+          Tejas Nikhar
+        </Divider>
+        <p>A cool and awesome guy willing to help others always.</p>
+      </Card>
     </div>
   );
 };

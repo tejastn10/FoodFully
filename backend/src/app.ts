@@ -4,6 +4,9 @@ import cors from "cors";
 import "colors";
 import { config } from "dotenv";
 
+import admin from "firebase-admin";
+const serviceAccount = require("../firebase.json");
+
 import { connectDB } from "./config/db";
 
 import { errorHandler, notFound } from "./middleware/error";
@@ -14,6 +17,10 @@ import { router as orderRoutes } from "./router/order";
 import { router as nearbyRoutes } from "./router/nearby";
 
 config();
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
 
 const app: Application = express();
 

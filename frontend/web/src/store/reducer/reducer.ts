@@ -1,8 +1,16 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import { AuthStateReducer, AuthInitialState } from "./auth";
+import { NearbyStateReducer, NearbyInitialState } from "./nearby";
+import { ProfileStateReducer, ProfileInitialState } from "./profile";
+import { DonationStateReducer, DonationInitialState } from "./donation";
+import { OrderStateReducer, OrderInitialState } from "./order";
 
 const reducers = {
   auth: AuthStateReducer,
+  nearby: NearbyStateReducer,
+  profile: ProfileStateReducer,
+  donation: DonationStateReducer,
+  order: OrderStateReducer,
 };
 
 export const rootReducer = () => {
@@ -10,4 +18,10 @@ export const rootReducer = () => {
   return reducer;
 };
 
-export { AuthInitialState };
+export {
+  AuthInitialState,
+  NearbyInitialState,
+  ProfileInitialState,
+  DonationInitialState,
+  OrderInitialState,
+};
