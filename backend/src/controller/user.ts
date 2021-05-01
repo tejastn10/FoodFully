@@ -3,7 +3,6 @@ import { generateToken } from "../utils/generateToken";
 
 import { User } from "./../models/User.Model";
 
-// TODO: Add admin properties
 export const postAuthUser = async (req: Request, res: Response) => {
   const { email, password } = await req.body;
 
@@ -13,6 +12,7 @@ export const postAuthUser = async (req: Request, res: Response) => {
     res.json({
       _id: user._id,
       name: user.name,
+      isAdmin: user.isAdmin,
       isNgo: user.isNgo,
       token: generateToken(user._id),
     });
@@ -30,11 +30,9 @@ export const getUserProfile = async (req: Request, res: Response) => {
       name: user.name,
       email: user.email,
       contact: user.contact,
+      isAdmin: user.isAdmin,
       isNgo: user.isNgo,
-      street: user.address.street,
-      city: user.address.city,
-      pincode: user.address.pincode,
-      state: user.address.state,
+      address: user.address,
     });
   } else {
     res.status(404);
@@ -46,13 +44,7 @@ export const putUpdateUser = async (req: Request, res: Response) => {
   const user = await User.findById(req.body.user._id);
 
   if (user) {
-    user.name = req.body.name || user.name;
-    user.email = req.body.email || user.email;
     user.contact = req.body.contact || user.contact;
-    user.address.street = req.body.street || user.address.street;
-    user.address.city = req.body.city || user.address.city;
-    user.address.pincode = req.body.pincode || user.address.pincode;
-    user.address.state = req.body.state || user.address.state;
 
     if (req.body.password) {
       user.password = req.body.password;
@@ -63,12 +55,10 @@ export const putUpdateUser = async (req: Request, res: Response) => {
     res.json({
       name: updatedUser.name,
       email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
       isNgo: updatedUser.isNgo,
       contact: updatedUser.contact,
-      street: updatedUser.address.street,
-      city: updatedUser.address.city,
-      pincode: updatedUser.address.pincode,
-      state: updatedUser.address.state,
+      address: updatedUser.address,
     });
   } else {
     res.status(404);
@@ -111,6 +101,7 @@ export const postRegisterUser = async (req: Request, res: Response) => {
     res.status(201).json({
       _id: user._id,
       name: user.name,
+      isAdmin: user.isAdmin,
       isNgo: user.isNgo,
       token: generateToken(user._id),
     });
