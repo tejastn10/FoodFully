@@ -2,12 +2,17 @@ import { Schema, model } from "mongoose";
 import { User } from "./User.Model";
 import { IDonation } from "../@types/Donation";
 
-const donationSchema = new Schema<IDonation>({
-  hotel: {
+const hotelSchema: Schema = new Schema({
+  user: {
     type: Schema.Types.ObjectId,
     required: true,
-    ref: User,
+    ref: "User",
   },
+  name: { type: String, required: true },
+});
+
+const donationSchema = new Schema<IDonation>({
+  hotel: hotelSchema,
   isUrgent: {
     type: Boolean,
     required: true,
