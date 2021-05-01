@@ -26,7 +26,7 @@ const Feedback = ({ visible, setVisible, donation }: Props) => {
         }
         subTitle={[
           <p>Donation ID: {donation?._id}</p>,
-          <p>Donation Time: {donation?.donatedOn}</p>,
+          <p>Donation Time: {donation?.donatedOn.substring(0, 10)}</p>,
           <p>Please Wait the NGO's will get in touch with you</p>,
         ]}
       />
