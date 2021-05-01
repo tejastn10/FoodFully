@@ -16,22 +16,35 @@ import {
   CalendarOutlined,
   BellOutlined,
   SoundOutlined,
+  ClearOutlined,
 } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import Feedback from "./Feedback";
-import { NearbyState } from "../../store/@types";
+import { AuthState, NearbyState, DonationState } from "../../store/@types";
 import { ApplicationState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { nearbyNGORequest } from "../../store/actions/actions";
+import {
+  donationRequest,
+  clearDonation,
+  nearbyNGORequest,
+} from "../../store/actions/actions";
 
 const Hotel = () => {
   const dispatch = useDispatch();
-  const [visible, setVisible] = useState(true);
-  const [urgent, setUrgent] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [isUrgent, setIsUrgent] = useState(false);
+  const [form] = Form.useForm();
 
-  const onFinish = (values: any) => {
-    console.log("Received values of form: ", values);
-    console.log("Received values of form: ", urgent);
+  const authState = useSelector<ApplicationState, AuthState>(
+    (state) => state.auth
+  );
+  const donationState = useSelector<ApplicationState, DonationState>(
+    (state) => state.donation
+  );
+
+  const onFinish = ({ quantity, description, bestBefore }: any) => {
+    form.resetFields();
+    dispatch(donationRequest({ isUrgent, quantity, description, bestBefore }));
   };
 
   const nearbyState = useSelector<ApplicationState, NearbyState>(
@@ -39,10 +52,10 @@ const Hotel = () => {
   );
 
   const { isLoading, errors, nearbyUsers } = nearbyState;
+  const { donation, errors: dErrors } = donationState;
 
   useEffect(() => {
     if (nearbyUsers === null || nearbyUsers.length === 0) {
-      message.info("Fetching Nearby NGOs...");
       dispatch(nearbyNGORequest());
     }
   }, [dispatch, nearbyUsers]);
@@ -53,15 +66,31 @@ const Hotel = () => {
     }
   }, [dispatch, errors.results]);
 
+  useEffect(() => {
+    if (donation) {
+      setVisible(true);
+      setTimeout(() => {
+        setVisible(false);
+        dispatch(clearDonation());
+      }, 5000);
+    }
+  }, [dispatch, donation]);
+
+  useEffect(() => {
+    if (dErrors.results) {
+      message.error(dErrors.results.message);
+    }
+  }, [dispatch, dErrors.results]);
+
   return (
     <>
-      <Feedback visible={visible} setVisible={setVisible} />
+      <Feedback visible={visible} setVisible={setVisible} donation={donation} />
       <Row gutter={16}>
         <Col span={16}>
-          <Form className="form" onFinish={onFinish}>
+          <Form className="form" form={form} onFinish={onFinish}>
             <h2>
               <ShopOutlined />
-              Hotel's Name
+              {authState.auth?.name}
             </h2>
             <h3>Add a Donation</h3>
             <Form.Item
@@ -79,7 +108,7 @@ const Hotel = () => {
               />
             </Form.Item>
             <Form.Item
-              name="bestbefore"
+              name="bestBefore"
               rules={[
                 {
                   required: true,
@@ -113,6 +142,7 @@ const Hotel = () => {
                 size="large"
                 htmlType="submit"
                 className="login-form-button"
+                onClick={() => setIsUrgent(false)}
               >
                 <BellOutlined />
                 Notify
@@ -126,10 +156,22 @@ const Hotel = () => {
                 size="large"
                 htmlType="submit"
                 className="login-form-button"
-                onClick={() => setUrgent(true)}
+                onClick={() => setIsUrgent(true)}
               >
                 <SoundOutlined />
                 Rapid Notify
+              </Button>
+            </Form.Item>
+            <Form.Item>
+              <Button
+                block
+                size="large"
+                onClick={() => {
+                  form.resetFields();
+                }}
+              >
+                <ClearOutlined />
+                Clear
               </Button>
             </Form.Item>
           </Form>
