@@ -31,11 +31,11 @@ const donationSchema = new Schema<IDonation>({
   },
   accepted: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   acceptedOn: {
     type: Date,
-    default: Date.now(),
+    default: "",
   },
   token: {
     type: String,
