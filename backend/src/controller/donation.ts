@@ -17,7 +17,7 @@ export const postNewDonation = async (req: Request, res: Response) => {
     name: req.body.user.name,
   };
 
-  const token = fcmToken ? fcmToken : "";
+  // const token = fcmToken ? fcmToken : "";
 
   const donation = await Donation.create({
     hotel,
