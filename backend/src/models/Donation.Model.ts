@@ -1,9 +1,8 @@
 import { Schema, model } from "mongoose";
-import { User } from "./User.Model";
 import { IDonation } from "../@types/Donation";
 
 const hotelSchema: Schema = new Schema({
-  user: {
+  id: {
     type: Schema.Types.ObjectId,
     required: true,
     ref: "User",
