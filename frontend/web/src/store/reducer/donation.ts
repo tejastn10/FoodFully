@@ -3,6 +3,9 @@ import {
   donationRequest,
   donationSuccess,
   donationError,
+  recentDonationRequest,
+  recentDonationSuccess,
+  recentDonationError,
   clearDonation,
 } from "../actions/actions";
 import { DonationState } from "../@types";
@@ -13,6 +16,7 @@ const initialState: DonationState = {
     results: null,
   },
   donation: null,
+  donations: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -28,10 +32,22 @@ const reducer = createReducer(initialState, (builder) => {
       state.isLoading = false;
       state.errors.results = action.payload;
     })
+    .addCase(recentDonationRequest, (state, _action) => {
+      state.isLoading = true;
+    })
+    .addCase(recentDonationSuccess, (state, action) => {
+      state.isLoading = false;
+      state.donations = action.payload;
+    })
+    .addCase(recentDonationError, (state, action) => {
+      state.isLoading = false;
+      state.errors.results = action.payload;
+    })
     .addCase(clearDonation, (state, _action) => {
       state.isLoading = false;
       state.errors.results = null;
       state.donation = null;
+      state.donations = null;
     })
     .addDefaultCase((state, _action) => {
       state.isLoading = false;

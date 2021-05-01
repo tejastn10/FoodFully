@@ -25,4 +25,23 @@ export const donationError = createAction(
     };
   }
 );
+export const recentDonationRequest = createAction(
+  DonationActionTypes.RECENT_DONATION_REQUEST
+);
+export const recentDonationSuccess = createAction(
+  DonationActionTypes.RECENT_DONATION_SUCCESS,
+  (data: any) => {
+    return {
+      payload: data,
+    };
+  }
+);
+export const recentDonationError = createAction(
+  DonationActionTypes.RECENT_DONATION_ERROR,
+  (data: any) => {
+    return {
+      payload: data,
+    };
+  }
+);
 export const clearDonation = createAction(DonationActionTypes.CLEAR_DONATION);

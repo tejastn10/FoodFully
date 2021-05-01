@@ -53,3 +53,9 @@ export const donate: any = ({
 
   return API.post(URL, { isUrgent, quantity, description, bestBefore });
 };
+
+export const getRecentDonations: any = () => {
+  const URL = `${API_ENDPOINT}/api/donation`;
+
+  return API.get(URL);
+};

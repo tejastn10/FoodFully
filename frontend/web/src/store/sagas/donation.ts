@@ -9,6 +9,9 @@ import {
   donationRequest,
   donationSuccess,
   donationError,
+  recentDonationRequest,
+  recentDonationSuccess,
+  recentDonationError,
 } from "../actions/actions";
 
 const sendDonation = function* (action: Action): any {
@@ -27,10 +30,30 @@ const sendDonation = function* (action: Action): any {
   }
 };
 
+const getRecentDonation = function* (action: Action): any {
+  try {
+    if (recentDonationRequest.match(action)) {
+      const res = yield call(API.getRecentDonations, action.payload);
+      const data = res.data;
+      if (res.status !== 200) {
+        yield put(recentDonationError(data.error));
+      } else {
+        yield put(recentDonationSuccess(data));
+      }
+    }
+  } catch (error) {
+    yield put(recentDonationError(getCustomError(error.response.data)));
+  }
+};
+
 const watchDonationRequest = function* () {
   yield takeLatest(donationRequest.type, sendDonation);
 };
 
+const watchRecentDonationRequest = function* () {
+  yield takeLatest(recentDonationRequest.type, getRecentDonation);
+};
+
 export default function* userSaga() {
-  yield all([fork(watchDonationRequest)]);
+  yield all([fork(watchDonationRequest), fork(watchRecentDonationRequest)]);
 }

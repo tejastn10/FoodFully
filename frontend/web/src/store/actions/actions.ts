@@ -30,6 +30,9 @@ import {
   donationRequest,
   donationSuccess,
   donationError,
+  recentDonationRequest,
+  recentDonationSuccess,
+  recentDonationError,
   clearDonation,
 } from "./donation";
 
@@ -59,5 +62,8 @@ export {
   donationRequest,
   donationSuccess,
   donationError,
+  recentDonationRequest,
+  recentDonationSuccess,
+  recentDonationError,
   clearDonation,
 };
