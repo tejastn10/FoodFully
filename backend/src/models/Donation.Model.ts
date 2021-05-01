@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 import { IDonation } from "../@types/Donation";
 
 const hotelSchema: Schema = new Schema({
-  id: {
+  _id: {
     type: Schema.Types.ObjectId,
     required: true,
     ref: "User",

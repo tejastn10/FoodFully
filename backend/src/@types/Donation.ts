@@ -2,7 +2,7 @@ import { Document } from "mongoose";
 
 export interface IDonation extends Document {
   hotel: {
-    id: String;
+    _id: String;
     name: String;
   };
   isUrgent: Boolean;
