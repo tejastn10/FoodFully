@@ -13,7 +13,7 @@ const config: Config = {
   production: {
     api_endpoint:
       process.env.REACT_APP_PRODUCTION_API_ENDPOINT ||
-      "https://foodfully.herokuapp.com/",
+      "https://foodfully.herokuapp.com",
   },
   development: {
     api_endpoint: process.env.REACT_APP_DEVELOPMENT_API_ENDPOINT || "",
