@@ -65,3 +65,9 @@ export const order: any = (donationID: any) => {
 
   return API.post(URL, { donationID });
 };
+
+export const getUserHistory: any = () => {
+  const URL = `${API_ENDPOINT}/api/users/history`;
+
+  return API.get(URL);
+};
