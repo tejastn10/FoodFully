@@ -5,6 +5,7 @@ import {
   postAuthUser,
   postRegisterUser,
   putUpdateUser,
+  getHistory,
 } from "../controller/user";
 import { protect } from "../middleware/auth";
 
@@ -29,3 +30,9 @@ router.get("/profile", asyncHandler(protect), asyncHandler(getUserProfile));
 // @route    PUT /api/users/profile
 // @access   Private
 router.put("/profile", asyncHandler(protect), asyncHandler(putUpdateUser));
+
+// @desc     Get User History
+// @route    GET /api/users/history
+// @access   Private
+router.get("/history", asyncHandler(protect), asyncHandler(getHistory));
+
