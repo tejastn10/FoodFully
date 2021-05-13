@@ -25,6 +25,9 @@ import {
   updateProfileSuccess,
   updateProfileError,
   clearProfile,
+  getHistoryRequest,
+  getHistorySuccess,
+  getHistoryError,
 } from "./profile";
 import {
   donationRequest,
@@ -60,6 +63,9 @@ export {
   updateProfileSuccess,
   updateProfileError,
   clearProfile,
+  getHistoryRequest,
+  getHistorySuccess,
+  getHistoryError,
   donationRequest,
   donationSuccess,
   donationError,
