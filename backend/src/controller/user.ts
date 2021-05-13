@@ -1,4 +1,6 @@
 import { Request, Response } from "express";
+import { Donation } from "../models/Donation.Model";
+import { Order } from "../models/Order.Model";
 import { generateToken } from "../utils/generateToken";
 
 import { User } from "./../models/User.Model";
@@ -110,3 +112,21 @@ export const postRegisterUser = async (req: Request, res: Response) => {
     throw new Error("❗ Invalid User data!");
   }
 };
+
+export const getHistory = async (req: Request, res: Response) => {
+  const user = await User.findById(req.body.user._id);
+
+  if (user) {
+    if (user.isNgo) {
+      const orders = await Order.find({ Ngo: user as any });
+      res.json(orders);
+    } else {
+      const donations = await Donation.find({ hotel: user as any });
+      res.json(donations);
+    }
+  } else {
+    res.status(404);
+    throw new Error("❌ User Not Found!");
+  }
+};
+
