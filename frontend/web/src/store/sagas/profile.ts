@@ -12,6 +12,9 @@ import {
   updateProfileRequest,
   updateProfileSuccess,
   updateProfileError,
+  getHistoryRequest,
+  getHistorySuccess,
+  getHistoryError,
 } from "../actions/actions";
 
 const getUserProfile = function* (action: Action): any {
@@ -46,6 +49,22 @@ const updateUserProfile = function* (action: Action): any {
   }
 };
 
+const getHistory = function* (action: Action): any {
+  try {
+    if (getHistoryRequest.match(action)) {
+      const res = yield call(API.getUserHistory, action.payload);
+      const data = res.data;
+      if (res.status !== 200) {
+        yield put(getHistoryError(data.error));
+      } else {
+        yield put(getHistorySuccess(data));
+      }
+    }
+  } catch (error) {
+    yield put(getHistoryError(getCustomError(error.response.data)));
+  }
+};
+
 const watchUserProfileRequest = function* () {
   yield takeLatest(getProfileRequest.type, getUserProfile);
 };
@@ -54,9 +73,14 @@ const watchUpdateUserProfileRequest = function* () {
   yield takeLatest(updateProfileRequest.type, updateUserProfile);
 };
 
+const watchHistoryRequest = function* () {
+  yield takeLatest(getHistoryRequest.type, getHistory);
+};
+
 export default function* userSaga() {
   yield all([
     fork(watchUserProfileRequest),
     fork(watchUpdateUserProfileRequest),
+    fork(watchHistoryRequest),
   ]);
 }
