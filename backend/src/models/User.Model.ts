@@ -24,7 +24,6 @@ const userSchema = new Schema<IUser>(
     },
     isAdmin: {
       type: Boolean,
-      required: true,
       default: false,
     },
     isNgo: {

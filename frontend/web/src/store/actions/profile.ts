@@ -46,3 +46,23 @@ export const updateProfileError = createAction(
     };
   }
 );
+
+export const getHistoryRequest = createAction(
+  ProfileActionTypes.HISTORY_REQUEST
+);
+export const getHistorySuccess = createAction(
+  ProfileActionTypes.HISTORY_SUCCESS,
+  (data: any) => {
+    return {
+      payload: data,
+    };
+  }
+);
+export const getHistoryError = createAction(
+  ProfileActionTypes.HISTORY_ERROR,
+  (data: any) => {
+    return {
+      payload: data,
+    };
+  }
+);

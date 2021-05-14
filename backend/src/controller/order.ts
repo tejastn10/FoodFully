@@ -49,7 +49,6 @@ export const postNewOrder = async (req: Request, res: Response) => {
 
   const order = await Order.create({ donation, Ngo, hotel });
 
-
   if (order) {
     res.status(201).json(order);
   }
@@ -69,4 +68,10 @@ export const putUpdateOrder = async (req: Request, res: Response) => {
   }
 
   await userOrder.save();
+  res.json({ message: "✅ Order Delivered" });
+};
+
+export const getAllOrders = async (_req: Request, res: Response) => {
+  const orders = await Order.find({}).populate("user", "id name");
+  res.json(orders);
 };

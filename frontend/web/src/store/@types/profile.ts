@@ -1,6 +1,9 @@
 import { Errors } from ".";
+import { Donation } from "./donation";
+import { Order } from "./order";
 
 export interface User {
+  _id: string;
   name: string;
   email: string;
   contact: string;
@@ -18,6 +21,7 @@ export interface ProfileState {
   isLoading: boolean;
   errors: Errors;
   profile: User | null;
+  history: Donation[] | Order[] | null;
 }
 
 export enum ProfileActionTypes {
@@ -29,4 +33,7 @@ export enum ProfileActionTypes {
   UPDATE_PROFILE_SUCCESS = "@@user/UPDATE_PROFILE_SUCCESS",
   UPDATE_PROFILE_ERROR = "@@user/UPDATE_PROFILE_ERROR",
   CLEAR_PROFILE_ERROR = "@@user/CLEAR_PROFILE_ERROR",
+  HISTORY_REQUEST = "@@user/HISTORY_REQUEST",
+  HISTORY_SUCCESS = "@@user/HISTORY_SUCCESS",
+  HISTORY_ERROR = "@@user/HISTORY_ERROR",
 }

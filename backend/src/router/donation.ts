@@ -1,7 +1,11 @@
 import { Router } from "express";
 import asyncHandler from "express-async-handler";
-import { postNewDonation, getRecentDonations } from "../controller/donation";
-import { protect } from "../middleware/auth";
+import {
+  postNewDonation,
+  getRecentDonations,
+  getAllDonations,
+} from "../controller/donation";
+import { admin, protect } from "../middleware/auth";
 
 export const router: Router = Router();
 
@@ -14,3 +18,13 @@ router.post("/", asyncHandler(protect), asyncHandler(postNewDonation));
 //@route    GET /api/donation
 //@access   Private
 router.get("/", asyncHandler(protect), asyncHandler(getRecentDonations));
+
+// @desc     Get all donations
+// @route    GET /api/donation/all
+// @access   Private/Admin
+router.get(
+  "/all",
+  asyncHandler(protect),
+  asyncHandler(admin),
+  asyncHandler(getAllDonations)
+);

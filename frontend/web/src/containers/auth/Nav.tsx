@@ -4,9 +4,12 @@ import {
   LogoutOutlined,
   UserOutlined,
   SolutionOutlined,
-  VerifiedOutlined,
 } from "@ant-design/icons";
-import { clearNearby, logoutUser } from "../../store/actions/actions";
+import {
+  clearNearby,
+  clearProfile,
+  logoutUser,
+} from "../../store/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { ApplicationState } from "../../store/store";
 import { AuthState } from "../../store/@types";
@@ -22,6 +25,7 @@ export const Navbar = () => {
     message.success("You have successfully logged out!");
     dispatch(logoutUser());
     dispatch(clearNearby());
+    dispatch(clearProfile());
   };
   return (
     <div className="header">
@@ -53,14 +57,6 @@ export const Navbar = () => {
                   Profile
                 </Link>
               </Menu.Item>
-              {authState.auth?.isAdmin ? (
-                <Menu.Item key="5">
-                  <Link to="/admin">
-                    <VerifiedOutlined />
-                    Admin Panel
-                  </Link>
-                </Menu.Item>
-              ) : null}
               <Menu.Item key="6">
                 <Button danger type="primary" onClick={logout}>
                   <LogoutOutlined />

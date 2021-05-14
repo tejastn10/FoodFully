@@ -65,3 +65,45 @@ export const order: any = (donationID: any) => {
 
   return API.post(URL, { donationID });
 };
+
+export const getUserHistory: any = () => {
+  const URL = `${API_ENDPOINT}/api/users/history`;
+
+  return API.get(URL);
+};
+
+export const getUsers: any = () => {
+  const URL = `${API_ENDPOINT}/api/users`;
+
+  return API.get(URL);
+};
+
+export const updateUserPrivilege: any = ({ id, isAdmin }: any) => {
+  const URL = `${API_ENDPOINT}/api/users/${id}`;
+
+  return API.put(URL, { isAdmin });
+};
+
+export const deleteUser: any = (id: string) => {
+  const URL = `${API_ENDPOINT}/api/users/${id}`;
+
+  return API.deleteResource(URL);
+};
+
+export const getOrders: any = () => {
+  const URL = `${API_ENDPOINT}/api/order/all`;
+
+  return API.get(URL);
+};
+
+export const updateOrder: any = (order: string) => {
+  const URL = `${API_ENDPOINT}/api/order/${order}`;
+
+  return API.put(URL, order);
+};
+
+export const getDonations: any = () => {
+  const URL = `${API_ENDPOINT}/api/donation/all`;
+
+  return API.get(URL);
+};

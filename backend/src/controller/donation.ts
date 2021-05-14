@@ -39,3 +39,8 @@ export const getRecentDonations = async (req: Request, res: Response) => {
   );
   res.json(RecentDonations);
 };
+
+export const getAllDonations = async (_req: Request, res: Response) => {
+  const donations = await Donation.find({}).populate("user", "id name");
+  res.json(donations);
+};

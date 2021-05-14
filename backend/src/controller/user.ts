@@ -1,4 +1,6 @@
 import { Request, Response } from "express";
+import { Donation } from "../models/Donation.Model";
+import { Order } from "../models/Order.Model";
 import { generateToken } from "../utils/generateToken";
 
 import { User } from "./../models/User.Model";
@@ -73,6 +75,7 @@ export const postRegisterUser = async (req: Request, res: Response) => {
     password,
     contact,
     isNgo,
+    isAdmin,
     street,
     city,
     pincode,
@@ -88,12 +91,15 @@ export const postRegisterUser = async (req: Request, res: Response) => {
 
   const address = { street, city, pincode, state };
 
+  const Admin = isAdmin ? isAdmin : false;
+
   const user = await User.create({
     name,
     email,
     password,
     contact,
     isNgo,
+    isAdmin: Admin,
     address,
   });
 
@@ -108,5 +114,54 @@ export const postRegisterUser = async (req: Request, res: Response) => {
   } else {
     res.status(400);
     throw new Error("❗ Invalid User data!");
+  }
+};
+
+export const getHistory = async (req: Request, res: Response) => {
+  const user = await User.findById(req.body.user._id);
+
+  if (user) {
+    if (user.isNgo) {
+      const orders = await Order.find({ Ngo: user as any });
+      res.json(orders);
+    } else {
+      const donations = await Donation.find({ hotel: user as any });
+      res.json(donations);
+    }
+  } else {
+    res.status(404);
+    throw new Error("❌ User Not Found!");
+  }
+};
+
+export const getUsers = async (_req: Request, res: Response) => {
+  const users = await User.find({});
+  res.json(users);
+};
+
+export const putUpdateUserById = async (req: Request, res: Response) => {
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    user.isAdmin = req.body.isAdmin;
+
+    await user.save();
+
+    res.json({ message: "✅ User Privileges updated" });
+  } else {
+    res.status(404);
+    throw new Error("❌ User Not Found!");
+  }
+};
+
+export const deleteUser = async (req: Request, res: Response) => {
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    await user.remove();
+    res.json({ message: "🗑 User deleted!" });
+  } else {
+    res.status(404);
+    throw new Error("❌ User Not found!");
   }
 };

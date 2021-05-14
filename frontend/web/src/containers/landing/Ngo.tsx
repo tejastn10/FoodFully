@@ -57,7 +57,9 @@ const Ngo = () => {
 
   useEffect(() => {
     if (donations === null || donations?.length === 0) {
-      dispatch(recentDonationRequest());
+      setTimeout(() => {
+        dispatch(recentDonationRequest());
+      }, 15000);
     }
   }, [dispatch, donations]);
 
