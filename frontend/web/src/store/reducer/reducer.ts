@@ -4,6 +4,7 @@ import { NearbyStateReducer, NearbyInitialState } from "./nearby";
 import { ProfileStateReducer, ProfileInitialState } from "./profile";
 import { DonationStateReducer, DonationInitialState } from "./donation";
 import { OrderStateReducer, OrderInitialState } from "./order";
+import { AdminStateReducer, AdminInitialState } from "./admin";
 
 const reducers = {
   auth: AuthStateReducer,
@@ -11,6 +12,7 @@ const reducers = {
   profile: ProfileStateReducer,
   donation: DonationStateReducer,
   order: OrderStateReducer,
+  admin: AdminStateReducer,
 };
 
 export const rootReducer = () => {
@@ -24,4 +26,5 @@ export {
   ProfileInitialState,
   DonationInitialState,
   OrderInitialState,
+  AdminInitialState,
 };
