@@ -3,6 +3,7 @@ import { Donation } from "./donation";
 import { Order } from "./order";
 
 export interface User {
+  _id: string;
   name: string;
   email: string;
   contact: string;
