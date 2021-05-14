@@ -12,6 +12,7 @@ import {
   ProfileInitialState,
   DonationInitialState,
   OrderInitialState,
+  AdminInitialState,
 } from "./store/reducer/reducer";
 
 const initialState: ApplicationState = {
@@ -20,6 +21,7 @@ const initialState: ApplicationState = {
   profile: ProfileInitialState,
   donation: DonationInitialState,
   order: OrderInitialState,
+  admin: AdminInitialState,
 };
 const store = configureAppStore(initialState);
 

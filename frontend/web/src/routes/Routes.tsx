@@ -7,6 +7,7 @@ import Landing from "../containers/landing/Landing";
 import Contact from "../components/Contact";
 import NotFound from "../components/404NotFound";
 import Profile from "../containers/auth/Profile";
+import Admin from "../containers/admin/Admin";
 
 export const Routes = () => {
   return (
@@ -17,6 +18,7 @@ export const Routes = () => {
       <Route exact path="/about" component={About} />
       <Route exact path="/contact" component={Contact} />
       <Route exact path="/profile" component={Profile} />
+      <Route exact path="/admin" component={Admin} />
       <Route path="*" component={NotFound} />
     </Switch>
   );
