@@ -4,6 +4,7 @@ import nearbySaga from "./nearby";
 import profileSaga from "./profile";
 import donationSaga from "./donation";
 import orderSaga from "./order";
+import adminSaga from "./admin";
 
 export const rootSaga = function* () {
   yield all([
@@ -12,5 +13,6 @@ export const rootSaga = function* () {
     fork(profileSaga),
     fork(donationSaga),
     fork(orderSaga),
+    fork(adminSaga),
   ]);
 };
