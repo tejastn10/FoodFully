@@ -75,6 +75,7 @@ export const postRegisterUser = async (req: Request, res: Response) => {
     password,
     contact,
     isNgo,
+    isAdmin,
     street,
     city,
     pincode,
@@ -90,12 +91,15 @@ export const postRegisterUser = async (req: Request, res: Response) => {
 
   const address = { street, city, pincode, state };
 
+  const Admin = isAdmin ? isAdmin : false;
+
   const user = await User.create({
     name,
     email,
     password,
     contact,
     isNgo,
+    isAdmin: Admin,
     address,
   });
 
@@ -130,3 +134,34 @@ export const getHistory = async (req: Request, res: Response) => {
   }
 };
 
+export const getUsers = async (_req: Request, res: Response) => {
+  const users = await User.find({});
+  res.json(users);
+};
+
+export const putUpdateUserById = async (req: Request, res: Response) => {
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    user.isAdmin = req.body.isAdmin;
+
+    await user.save();
+
+    res.json({ message: "✅ User Privileges updated" });
+  } else {
+    res.status(404);
+    throw new Error("❌ User Not Found!");
+  }
+};
+
+export const deleteUser = async (req: Request, res: Response) => {
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    await user.remove();
+    res.json({ message: "🗑 User deleted!" });
+  } else {
+    res.status(404);
+    throw new Error("❌ User Not found!");
+  }
+};
