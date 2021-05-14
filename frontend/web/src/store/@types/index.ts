@@ -4,6 +4,7 @@ import { User, ProfileState, ProfileActionTypes } from "./profile";
 import { NearbyState, NearbyActionTypes } from "./nearby";
 import { DonationState, DonationActionTypes } from "./donation";
 import { OrderState, OrderActionTypes } from "./order";
+import { AdminState, AdminActionTypes } from "./admin";
 
 export interface Errors {
   results: CustomError | null;
@@ -15,6 +16,7 @@ export {
   NearbyActionTypes,
   DonationActionTypes,
   OrderActionTypes,
+  AdminActionTypes,
 };
 export type {
   Auth,
@@ -24,4 +26,5 @@ export type {
   NearbyState,
   DonationState,
   OrderState,
+  AdminState,
 };
