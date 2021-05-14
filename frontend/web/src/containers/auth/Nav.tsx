@@ -4,7 +4,6 @@ import {
   LogoutOutlined,
   UserOutlined,
   SolutionOutlined,
-  VerifiedOutlined,
 } from "@ant-design/icons";
 import {
   clearNearby,
@@ -58,14 +57,6 @@ export const Navbar = () => {
                   Profile
                 </Link>
               </Menu.Item>
-              {authState.auth?.isAdmin ? (
-                <Menu.Item key="5">
-                  <Link to="/admin">
-                    <VerifiedOutlined />
-                    Admin Panel
-                  </Link>
-                </Menu.Item>
-              ) : null}
               <Menu.Item key="6">
                 <Button danger type="primary" onClick={logout}>
                   <LogoutOutlined />

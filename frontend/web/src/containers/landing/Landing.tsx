@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { AuthState } from "../../store/@types";
 import Ngo from "./Ngo";
 import Hotel from "./Hotel";
+import Admin from "../admin/Admin";
 
 const Landing = () => {
   const authState = useSelector<ApplicationState, AuthState>(
@@ -20,7 +21,9 @@ const Landing = () => {
   );
 
   return authState.auth ? (
-    authState.auth?.isNgo ? (
+    authState.auth?.isAdmin ? (
+      <Admin />
+    ) : authState.auth?.isNgo ? (
       <Ngo />
     ) : (
       <Hotel />
