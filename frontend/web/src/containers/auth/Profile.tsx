@@ -12,6 +12,7 @@ import {
   Descriptions,
   message,
   Spin,
+  Tag,
 } from "antd";
 import {
   UserOutlined,
@@ -25,6 +26,7 @@ import { AuthState, ProfileState } from "../../store/@types";
 import {
   getProfileRequest,
   updateProfileRequest,
+  getHistoryRequest,
 } from "../../store/actions/actions";
 
 type validationStatus = "success" | "error" | "validating";
@@ -37,9 +39,8 @@ type submitProps = {
 const Profile = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [validationStatus, setValidationStatus] = useState<validationStatus>(
-    "success"
-  );
+  const [validationStatus, setValidationStatus] =
+    useState<validationStatus>("success");
   const [feedback, setFeedback] = useState(false);
 
   const authState = useSelector<ApplicationState, AuthState>(
@@ -51,7 +52,7 @@ const Profile = () => {
   );
 
   const { auth } = authState;
-  const { profile, isLoading, errors } = profileState;
+  const { profile, isLoading, errors, history: userHistory } = profileState;
 
   useEffect(() => {
     if (errors.results) {
@@ -60,6 +61,12 @@ const Profile = () => {
       setFeedback(true);
     }
   }, [errors.results]);
+
+  useEffect(() => {
+    if (!userHistory && profile) {
+      dispatch(getHistoryRequest());
+    }
+  }, [dispatch, profile, userHistory]);
 
   useEffect(() => {
     if (!auth) {
@@ -100,7 +107,100 @@ const Profile = () => {
     }
   };
 
-  return isLoading ? (
+  const donationColumns = [
+    {
+      title: "Quantity",
+      dataIndex: "quantity",
+    },
+    {
+      title: "Description",
+      dataIndex: "description",
+    },
+    {
+      title: "Donated On",
+      dataIndex: "donatedOn",
+      render: (date: string) => {
+        return <p>{date.substring(0, 10)}</p>;
+      },
+    },
+    {
+      title: "Accepted ?",
+      dataIndex: "accepted",
+      render: (bool: boolean) => {
+        return bool ? (
+          <Tag color="green" key="1">
+            Yes
+          </Tag>
+        ) : (
+          <Tag color="red" key="1">
+            No
+          </Tag>
+        );
+      },
+    },
+  ];
+
+  const orderColumns = [
+    {
+      title: "Donation ID",
+      dataIndex: "donation",
+      render: (donation: any) => {
+        return <p>{donation._id}</p>;
+      },
+    },
+    {
+      title: "Quantity",
+      dataIndex: "donation",
+      render: (donation: any) => {
+        return <p>{donation.quantity}</p>;
+      },
+    },
+
+    {
+      title: "Description",
+      dataIndex: "donation",
+      render: (donation: any) => {
+        return <p>{donation.description}</p>;
+      },
+    },
+    {
+      title: "Hotel",
+      dataIndex: "hotel",
+      render: (hotel: any) => {
+        return <p>{hotel.name}</p>;
+      },
+    },
+    {
+      title: "Delivered ?",
+      dataIndex: "delivered",
+      render: (bool: boolean) => {
+        return bool ? (
+          <Tag color="green" key="1">
+            Yes
+          </Tag>
+        ) : (
+          <Tag color="red" key="1">
+            No
+          </Tag>
+        );
+      },
+    },
+    {
+      title: "Delivery Date",
+      dataIndex: "deliveredOn",
+      render: (date: string) => {
+        return date ? (
+          <p>{date.substring(0, 10)}</p>
+        ) : (
+          <Tag color="red" key="2">
+            None
+          </Tag>
+        );
+      },
+    },
+  ];
+
+  return isLoading && !userHistory ? (
     <div className="loading">
       <Spin />
     </div>
@@ -207,9 +307,9 @@ const Profile = () => {
               </Tabs.TabPane>
               <Tabs.TabPane tab="History" key="2">
                 <Table
-                  // columns={columns}
-                  // dataSource={orders}
-                  rowKey={(order) => order._id}
+                  columns={profile.isNgo ? orderColumns : donationColumns}
+                  dataSource={userHistory as any}
+                  rowKey={(item) => item._id}
                 />
               </Tabs.TabPane>
             </Tabs>
