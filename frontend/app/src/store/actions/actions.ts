@@ -17,6 +17,9 @@ import {
   updateUserProfileSuccess,
   updateUserProfileError,
   clearUserError,
+  getHistoryRequest,
+  getHistorySuccess,
+  getHistoryError,
 } from "./user";
 import {
   nearbyHotelRequest,
@@ -45,6 +48,9 @@ export {
   updateUserProfileSuccess,
   updateUserProfileError,
   clearUserError,
+  getHistoryRequest,
+  getHistorySuccess,
+  getHistoryError,
   nearbyHotelRequest,
   nearbyHotelSuccess,
   nearbyHotelError,

@@ -8,6 +8,9 @@ import {
   updateUserProfileSuccess,
   updateUserProfileError,
   clearUserError,
+  getHistoryRequest,
+  getHistorySuccess,
+  getHistoryError,
 } from "../actions/actions";
 import { UserProfileState } from "../@types";
 
@@ -17,6 +20,7 @@ const initialState: UserProfileState = {
     results: null,
   },
   profile: null,
+  history: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -45,9 +49,24 @@ const reducer = createReducer(initialState, (builder) => {
       state.isLoading = false;
       state.errors.results = action.payload;
     })
+    .addCase(getHistoryRequest, (state, _action) => {
+      state.isLoading = true;
+      state.errors.results = null;
+      state.history = null;
+    })
+    .addCase(getHistorySuccess, (state, action) => {
+      state.isLoading = false;
+      state.history = action.payload;
+    })
+    .addCase(getHistoryError, (state, action) => {
+      state.isLoading = false;
+      state.errors.results = action.payload;
+    })
     .addCase(clearUserProfile, (state, _action) => {
       state.isLoading = false;
       state.profile = null;
+      state.errors.results = null;
+      state.history = null;
     })
     .addCase(clearUserError, (state, _action) => {
       state.errors.results = null;

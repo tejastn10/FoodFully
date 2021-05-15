@@ -52,3 +52,23 @@ export const updateUserProfileError = createAction(
 export const clearUserError = createAction(
   UserProfileActionTypes.CLEAR_USER_ERROR
 );
+
+export const getHistoryRequest = createAction(
+  UserProfileActionTypes.HISTORY_REQUEST
+);
+export const getHistorySuccess = createAction(
+  UserProfileActionTypes.HISTORY_SUCCESS,
+  (data: any) => {
+    return {
+      payload: data,
+    };
+  }
+);
+export const getHistoryError = createAction(
+  UserProfileActionTypes.HISTORY_ERROR,
+  (data: any) => {
+    return {
+      payload: data,
+    };
+  }
+);
