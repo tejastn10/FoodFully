@@ -12,9 +12,11 @@ import {
   HomeParamList,
   NearbyParamList,
   ProfileParamList,
+  HistoryParamList,
 } from "./types";
 import Nearby from "../screens/Nearby";
 import Profile from "../screens/Profile";
+import History from "../screens/History";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -24,7 +26,10 @@ const BottomTabNavigator = () => {
   return (
     <BottomTab.Navigator
       initialRouteName="Home"
-      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
+      tabBarOptions={{
+        activeTintColor: Colors[colorScheme].tint,
+        keyboardHidesTabBar: true,
+      }}
     >
       <BottomTab.Screen
         name="Home"
@@ -40,6 +45,16 @@ const BottomTabNavigator = () => {
         options={{
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="location-on" color={color} />
+          ),
+        }}
+      />
+
+      <BottomTab.Screen
+        name="History"
+        component={HistoryNavigator}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="history" color={color} />
           ),
         }}
       />
@@ -99,6 +114,20 @@ function ProfileNavigator() {
         options={{ headerTitle: "Profile" }}
       />
     </ProfileStack.Navigator>
+  );
+}
+
+const HistoryStack = createStackNavigator<HistoryParamList>();
+
+function HistoryNavigator() {
+  return (
+    <HistoryStack.Navigator>
+      <HistoryStack.Screen
+        name="HistoryScreen"
+        component={History}
+        options={{ headerTitle: "History" }}
+      />
+    </HistoryStack.Navigator>
   );
 }
 export default BottomTabNavigator;

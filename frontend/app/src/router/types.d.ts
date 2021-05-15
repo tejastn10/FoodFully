@@ -12,6 +12,7 @@ export type BottomTabParamList = {
   Home: undefined;
   Nearby: undefined;
   Profile: undefined;
+  History: undefined;
 };
 
 export type HomeParamList = {
@@ -24,6 +25,10 @@ export type NearbyParamList = {
 
 export type ProfileParamList = {
   ProfileScreen: undefined;
+};
+
+export type HistoryParamList = {
+  HistoryScreen: undefined;
 };
 
 export type RouteStackParamList<T extends keyof RootStackParamList> = {
