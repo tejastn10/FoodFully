@@ -31,3 +31,15 @@ export const updateUserProfile: any = (user: any) => {
 
   return API.put(URL, user);
 };
+
+export const getHotels: any = () => {
+  const URL = `${API_ENDPOINT}/api/nearby/hotel`;
+
+  return API.get(URL);
+};
+
+export const getNGOs: any = () => {
+  const URL = `${API_ENDPOINT}/api/nearby/ngo`;
+
+  return API.get(URL);
+};
