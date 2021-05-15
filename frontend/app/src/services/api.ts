@@ -43,3 +43,9 @@ export const getNGOs: any = () => {
 
   return API.get(URL);
 };
+
+export const getUserHistory: any = () => {
+  const URL = `${API_ENDPOINT}/api/users/history`;
+
+  return API.get(URL);
+};
