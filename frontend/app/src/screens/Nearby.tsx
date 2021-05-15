@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Alert, FlatList, StyleSheet } from "react-native";
+import { Alert, ActivityIndicator, FlatList, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { View, Text } from "../components/Themed";
 import useAuth from "../hooks/useAuth";
@@ -7,6 +7,7 @@ import { NearbyState } from "../store/@types";
 import { nearbyHotelRequest, nearbyNGORequest } from "../store/actions/actions";
 import { ApplicationState } from "../store/store";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import Center from "../components/Center";
 
 const Nearby = () => {
   const dispatch = useDispatch();
@@ -34,7 +35,9 @@ const Nearby = () => {
   }, [errors.results]);
 
   return isLoading || nearbyUsers === null || nearbyUsers.length === 0 ? (
-    <Text>Loading</Text>
+    <Center>
+      <ActivityIndicator size={40} color="#2f95dc" />
+    </Center>
   ) : (
     <View>
       <FlatList
@@ -74,4 +77,5 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     height: 200,
   },
+  loading: {},
 });
