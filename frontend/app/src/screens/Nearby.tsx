@@ -44,7 +44,6 @@ const Nearby = () => {
         keyExtractor={(u) => u._id}
         data={nearbyUsers}
         renderItem={(u) => {
-          // return <Text>{u.item.name}</Text>;
           return (
             <View style={styles.box}>
               <Text style={{ fontSize: 28, fontWeight: "bold" }}>
@@ -77,5 +76,4 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     height: 200,
   },
-  loading: {},
 });
