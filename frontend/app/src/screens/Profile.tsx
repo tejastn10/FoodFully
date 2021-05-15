@@ -9,6 +9,7 @@ import { RouteStackParamList } from "../router/types";
 import { UserProfileState } from "../store/@types";
 import {
   clearNearby,
+  clearUserProfile,
   getUserProfileRequest,
   logoutUser,
   updateUserProfileRequest,
@@ -26,11 +27,12 @@ const Profile: React.FC<RouteStackParamList<"Root">> = ({
   const profileState = useSelector<ApplicationState, UserProfileState>(
     (state) => state.userProfile
   );
-  const { profile, isLoading, errors, history } = profileState;
+  const { profile, isLoading, errors } = profileState;
 
   const logoutHandler = () => {
-    dispatch(logoutUser());
     dispatch(clearNearby());
+    dispatch(clearUserProfile());
+    dispatch(logoutUser());
     navigation.replace("Login");
   };
 
