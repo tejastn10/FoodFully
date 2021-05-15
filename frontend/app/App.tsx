@@ -6,6 +6,7 @@ import { ApplicationState, configureAppStore } from "./src/store/store";
 
 import {
   AuthInitialState,
+  NearbyInitialState,
   UserProfileInitialState,
 } from "./src/store/reducers/reducer";
 
@@ -15,6 +16,7 @@ import useColorScheme from "./src/hooks/useColorScheme";
 const initialState: ApplicationState = {
   authState: AuthInitialState,
   userProfile: UserProfileInitialState,
+  nearby: NearbyInitialState,
 };
 const store = configureAppStore(initialState);
 

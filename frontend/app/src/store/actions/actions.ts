@@ -18,6 +18,15 @@ import {
   updateUserProfileError,
   clearUserError,
 } from "./user";
+import {
+  nearbyHotelRequest,
+  nearbyHotelSuccess,
+  nearbyHotelError,
+  nearbyNGORequest,
+  nearbyNGOSuccess,
+  nearbyNGOError,
+  clearNearby,
+} from "./nearby";
 
 export {
   loginAuthRequest,
@@ -36,4 +45,11 @@ export {
   updateUserProfileSuccess,
   updateUserProfileError,
   clearUserError,
+  nearbyHotelRequest,
+  nearbyHotelSuccess,
+  nearbyHotelError,
+  nearbyNGORequest,
+  nearbyNGOSuccess,
+  nearbyNGOError,
+  clearNearby,
 };
