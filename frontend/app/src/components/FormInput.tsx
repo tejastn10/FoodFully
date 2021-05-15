@@ -10,7 +10,8 @@ type Props = {
   keyboardType?: KeyboardTypeOptions | undefined;
   secureText?: boolean;
   numberOfLines?: number;
-  onChange: (val: string) => void;
+  editable?: boolean;
+  onChange?: (val: string) => void;
 };
 
 const FormInput = ({
@@ -20,6 +21,7 @@ const FormInput = ({
   secureText = false,
   onChange,
   numberOfLines = 1,
+  editable = true,
 }: Props) => {
   return (
     <View style={styles.container}>
@@ -33,6 +35,7 @@ const FormInput = ({
         numberOfLines={numberOfLines}
         autoCorrect={false}
         autoCapitalize="none"
+        editable={editable}
         keyboardType={keyboardType}
       ></TextInput>
     </View>
