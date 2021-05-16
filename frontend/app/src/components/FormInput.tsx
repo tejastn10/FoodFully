@@ -11,6 +11,7 @@ type Props = {
   secureText?: boolean;
   numberOfLines?: number;
   editable?: boolean;
+  multiline?: boolean;
   onChange?: (val: string) => void;
 };
 
@@ -22,6 +23,7 @@ const FormInput = ({
   onChange,
   numberOfLines = 1,
   editable = true,
+  multiline = false,
 }: Props) => {
   return (
     <View style={styles.container}>
@@ -36,6 +38,7 @@ const FormInput = ({
         autoCorrect={false}
         autoCapitalize="none"
         editable={editable}
+        multiline={multiline}
         keyboardType={keyboardType}
       ></TextInput>
     </View>
