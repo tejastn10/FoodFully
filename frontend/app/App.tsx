@@ -6,6 +6,7 @@ import { ApplicationState, configureAppStore } from "./src/store/store";
 
 import {
   AuthInitialState,
+  DonationInitialState,
   NearbyInitialState,
   UserProfileInitialState,
 } from "./src/store/reducers/reducer";
@@ -17,6 +18,7 @@ const initialState: ApplicationState = {
   authState: AuthInitialState,
   userProfile: UserProfileInitialState,
   nearby: NearbyInitialState,
+  donation: DonationInitialState,
 };
 const store = configureAppStore(initialState);
 
