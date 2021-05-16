@@ -49,3 +49,21 @@ export const getUserHistory: any = () => {
 
   return API.get(URL);
 };
+
+export const donate: any = ({
+  isUrgent,
+  quantity,
+  description,
+  bestBefore,
+}: any) => {
+  const URL = `${API_ENDPOINT}/api/donation`;
+
+  return API.post(URL, { isUrgent, quantity, description, bestBefore });
+};
+
+export const getRecentDonations: any = () => {
+  const URL = `${API_ENDPOINT}/api/donation`;
+
+  return API.get(URL);
+};
+
