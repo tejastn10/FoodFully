@@ -1,12 +1,12 @@
 import React from "react";
-import { View, Text } from "../components/Themed";
+import useAuth from "../hooks/useAuth";
+import Hotel from "./Hotel";
+import Ngo from "./Ngo";
 
 const Home = () => {
-  return (
-    <View>
-      <Text>Home</Text>
-    </View>
-  );
+  const { user } = useAuth();
+
+  return user?.isNgo ? <Ngo /> : <Hotel />;
 };
 
 export default Home;
