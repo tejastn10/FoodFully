@@ -30,6 +30,15 @@ import {
   nearbyNGOError,
   clearNearby,
 } from "./nearby";
+import {
+  donationRequest,
+  donationSuccess,
+  donationError,
+  recentDonationRequest,
+  recentDonationSuccess,
+  recentDonationError,
+  clearDonation,
+} from "./donation";
 
 export {
   loginAuthRequest,
@@ -58,4 +67,11 @@ export {
   nearbyNGOSuccess,
   nearbyNGOError,
   clearNearby,
+  donationRequest,
+  donationSuccess,
+  donationError,
+  recentDonationRequest,
+  recentDonationSuccess,
+  recentDonationError,
+  clearDonation,
 };
