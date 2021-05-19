@@ -7,6 +7,10 @@
   z-index: 5;
 }
 
+.cnt {
+  min-height: 80vh;
+}
+
 .ftr {
   background-color: #e5e5e5;
 }
