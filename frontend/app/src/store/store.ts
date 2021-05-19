@@ -9,6 +9,7 @@ import {
   UserProfileState,
   NearbyState,
   DonationState,
+  OrderState,
 } from "./@types";
 
 export type ApplicationState = {
@@ -16,6 +17,7 @@ export type ApplicationState = {
   userProfile: UserProfileState;
   nearby: NearbyState;
   donation: DonationState;
+  order: OrderState;
 };
 
 export const configureAppStore = (initialState: ApplicationState) => {

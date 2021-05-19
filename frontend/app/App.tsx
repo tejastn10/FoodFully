@@ -9,6 +9,7 @@ import {
   DonationInitialState,
   NearbyInitialState,
   UserProfileInitialState,
+  OrderInitialState,
 } from "./src/store/reducers/reducer";
 
 import Navigator from "./src/router/Navigator";
@@ -19,6 +20,7 @@ const initialState: ApplicationState = {
   userProfile: UserProfileInitialState,
   nearby: NearbyInitialState,
   donation: DonationInitialState,
+  order: OrderInitialState,
 };
 const store = configureAppStore(initialState);
 
