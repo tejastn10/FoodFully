@@ -1,5 +1,11 @@
-import React, { useEffect } from "react";
-import { Alert, ActivityIndicator, FlatList, StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  Alert,
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  RefreshControl,
+} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { View, Text } from "../components/Themed";
 import useAuth from "../hooks/useAuth";
@@ -12,6 +18,7 @@ import Center from "../components/Center";
 const Nearby = () => {
   const dispatch = useDispatch();
   const { user } = useAuth();
+  const [refreshing, setRefreshing] = useState(false);
 
   const nearbyState = useSelector<ApplicationState, NearbyState>(
     (state) => state.nearby
@@ -26,6 +33,7 @@ const Nearby = () => {
         dispatch(nearbyNGORequest());
       }
     }
+    setRefreshing(false);
   }, [dispatch, user?.isNgo, nearbyUsers]);
 
   useEffect(() => {
@@ -34,6 +42,15 @@ const Nearby = () => {
     }
   }, [errors.results]);
 
+  const onRefresh = () => {
+    setRefreshing(true);
+    if (user?.isNgo) {
+      dispatch(nearbyHotelRequest());
+    } else {
+      dispatch(nearbyNGORequest());
+    }
+  };
+
   return isLoading || nearbyUsers === null || nearbyUsers.length === 0 ? (
     <Center>
       <ActivityIndicator size={40} color="#2f95dc" />
@@ -41,6 +58,9 @@ const Nearby = () => {
   ) : (
     <View>
       <FlatList
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
         keyExtractor={(u) => u._id}
         data={nearbyUsers}
         renderItem={(u) => {

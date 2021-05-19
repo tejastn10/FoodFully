@@ -1,5 +1,11 @@
-import React, { useEffect } from "react";
-import { ActivityIndicator, Alert, FlatList, StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  ActivityIndicator,
+  Alert,
+  FlatList,
+  RefreshControl,
+  StyleSheet,
+} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import Center from "../components/Center";
 import { View, Text } from "../components/Themed";
@@ -9,6 +15,7 @@ import { ApplicationState } from "../store/store";
 
 const History = () => {
   const dispatch = useDispatch();
+  const [refreshing, setRefreshing] = useState(false);
   const profileState = useSelector<ApplicationState, UserProfileState>(
     (state) => state.userProfile
   );
@@ -24,7 +31,13 @@ const History = () => {
     if (!history || history.length === 0) {
       dispatch(getHistoryRequest());
     }
+    setRefreshing(false);
   }, [dispatch, history]);
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    dispatch(getHistoryRequest());
+  };
 
   return isLoading || history === null || history.length === 0 ? (
     <Center>
@@ -33,6 +46,9 @@ const History = () => {
   ) : profile?.isNgo ? (
     <View>
       <FlatList
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
         keyExtractor={(h) => h._id}
         data={history as any}
         renderItem={(h) => {
@@ -63,6 +79,9 @@ const History = () => {
   ) : (
     <View>
       <FlatList
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
         keyExtractor={(h) => h._id}
         data={history as any}
         renderItem={(h) => {
