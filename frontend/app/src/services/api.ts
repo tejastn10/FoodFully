@@ -72,3 +72,9 @@ export const order: any = (donationID: any) => {
 
   return API.post(URL, { donationID });
 };
+
+export const addToken: any = (token: string) => {
+  const URL = `${API_ENDPOINT}/api/users/token`;
+
+  return API.post(URL, { token });
+};

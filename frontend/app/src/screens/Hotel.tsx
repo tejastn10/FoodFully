@@ -9,6 +9,7 @@ import { height } from "../constants/Layout";
 import { DonationState } from "../store/@types";
 import { clearDonation, donationRequest } from "../store/actions/actions";
 import { ApplicationState } from "../store/store";
+import messaging from "@react-native-firebase/messaging";
 
 const Hotel = () => {
   const dispatch = useDispatch();
@@ -40,29 +41,35 @@ const Hotel = () => {
     }
   }, [errors.results]);
 
-  const submitHandler = (rapid?: boolean) => {
-    if (quantity && bestBefore && description) {
-      if (rapid) {
-        dispatch(
-          donationRequest({
-            isUrgent: rapid,
-            quantity,
-            description,
-            bestBefore,
-          })
-        );
+  const submitHandler = async (rapid?: boolean) => {
+    const fcmToken = await messaging().getToken();
+    console.log(fcmToken);
+    if (fcmToken !== null || fcmToken !== "") {
+      if (quantity && bestBefore && description) {
+        if (rapid) {
+          dispatch(
+            donationRequest({
+              isUrgent: rapid,
+              quantity,
+              description,
+              bestBefore,
+              fcmToken,
+            })
+          );
+        } else {
+          dispatch(
+            donationRequest({
+              isUrgent: false,
+              quantity,
+              description,
+              bestBefore,
+              fcmToken,
+            })
+          );
+        }
       } else {
-        dispatch(
-          donationRequest({
-            isUrgent: false,
-            quantity,
-            description,
-            bestBefore,
-          })
-        );
+        Alert.alert("Error", "Please enter All Values");
       }
-    } else {
-      Alert.alert("Error", "Please enter All Values");
     }
   };
 

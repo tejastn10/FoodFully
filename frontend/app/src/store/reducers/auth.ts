@@ -12,7 +12,6 @@ import {
 import { AuthState } from "../@types";
 import {
   clearFromLocalStorage,
-  getFromLocalStorage,
   saveToLocalStorage,
 } from "../../utils/api-helper";
 
