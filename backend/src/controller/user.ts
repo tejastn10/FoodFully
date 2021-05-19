@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { Donation } from "../models/Donation.Model";
 import { Order } from "../models/Order.Model";
+import { Token } from "../models/Token.Model";
 import { generateToken } from "../utils/generateToken";
 
 import { User } from "./../models/User.Model";
@@ -163,5 +164,25 @@ export const deleteUser = async (req: Request, res: Response) => {
   } else {
     res.status(404);
     throw new Error("❌ User Not found!");
+  }
+};
+
+export const addToken = async (req: Request, res: Response) => {
+  const { token } = await req.body;
+
+  const user = await User.findById(req.body.user._id);
+  const tokens = await Token.findById("60a5126833228520d579a426");
+
+  if (tokens) {
+    if (user) {
+      if (user.isNgo) {
+        tokens.token.push(token);
+        await tokens.save();
+        console.log(tokens);
+      }
+    } else {
+      res.status(404);
+      throw new Error("❌ User Not found!");
+    }
   }
 };

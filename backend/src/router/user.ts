@@ -9,6 +9,7 @@ import {
   getUsers,
   putUpdateUserById,
   deleteUser,
+  addToken,
 } from "../controller/user";
 import { admin, protect } from "../middleware/auth";
 
@@ -68,3 +69,8 @@ router.delete(
   asyncHandler(admin),
   asyncHandler(deleteUser)
 );
+
+// @desc     Get User token
+// @route    POST /api/users/token
+// @access   Private
+router.post("/token", asyncHandler(protect), asyncHandler(addToken));
