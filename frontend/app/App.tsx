@@ -6,7 +6,10 @@ import { ApplicationState, configureAppStore } from "./src/store/store";
 
 import {
   AuthInitialState,
+  DonationInitialState,
+  NearbyInitialState,
   UserProfileInitialState,
+  OrderInitialState,
 } from "./src/store/reducers/reducer";
 
 import Navigator from "./src/router/Navigator";
@@ -15,6 +18,9 @@ import useColorScheme from "./src/hooks/useColorScheme";
 const initialState: ApplicationState = {
   authState: AuthInitialState,
   userProfile: UserProfileInitialState,
+  nearby: NearbyInitialState,
+  donation: DonationInitialState,
+  order: OrderInitialState,
 };
 const store = configureAppStore(initialState);
 

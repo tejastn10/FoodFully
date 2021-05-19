@@ -112,7 +112,7 @@ const Ngo = () => {
             {donations === null || donations?.length === 0 ? (
               <Alert
                 message="No Recent Donations"
-                description="YOu will be notified once we receive a donataion."
+                description="You will be notified once we receive a donataion."
                 type="info"
                 showIcon
               />

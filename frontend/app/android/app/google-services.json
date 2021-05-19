@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1057665414439",
+    "project_id": "foodfully-fd639",
+    "storage_bucket": "foodfully-fd639.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057665414439:android:2c7a8780420f9abc672502",
+        "android_client_info": {
+          "package_name": "com.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057665414439-ultbvd9cecnamqqm846stitidnhu49v1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4e4bAieiADMf7J8gPO4Qt_fhyv-R4A-4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057665414439-ultbvd9cecnamqqm846stitidnhu49v1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

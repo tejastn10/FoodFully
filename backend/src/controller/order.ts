@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
 import { Donation } from "../models/Donation.Model";
 import { Order } from "../models/Order.Model";
+import admin from "firebase-admin";
 import { User } from "../models/User.Model";
 
 export const postNewOrder = async (req: Request, res: Response) => {
-  const { donationID, fcmToken } = await req.body;
+  const { donationID } = await req.body;
 
   const user = await req.body.user;
-  const tokens = [fcmToken];
 
   const userDonation = await Donation.findById(donationID);
 
@@ -47,7 +47,19 @@ export const postNewOrder = async (req: Request, res: Response) => {
     address: HotelUser?.address,
   };
 
+  const token: any = [updatedDonation.token];
+
   const order = await Order.create({ donation, Ngo, hotel });
+
+  if (token !== "") {
+    await admin.messaging().sendMulticast({
+      tokens: token,
+      notification: {
+        title: "Order Accepted",
+        body: `Order accepted by ${Ngo.name}`,
+      },
+    });
+  }
 
   if (order) {
     res.status(201).json(order);

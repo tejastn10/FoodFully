@@ -1,8 +1,11 @@
 import { Request, Response } from "express";
 import { Donation } from "../models/Donation.Model";
+import admin from "firebase-admin";
+import { Token } from "../models/Token.Model";
 
 export const postNewDonation = async (req: Request, res: Response) => {
-  const { isUrgent, quantity, description, bestBefore } = await req.body;
+  const { isUrgent, quantity, description, bestBefore, fcmToken } =
+    await req.body;
 
   const user = await req.body.user;
 
@@ -17,7 +20,9 @@ export const postNewDonation = async (req: Request, res: Response) => {
     name: req.body.user.name,
   };
 
-  // const token = fcmToken ? fcmToken : "";
+  const token = fcmToken
+    ? fcmToken
+    : "f5_6pYX_Ro2t2JeYR-6rIi:APA91bFt60oux74c4Y5kpjjbzeuOG5YqFNv3g5Q4BpLKZareGf64G2w5bLDeRTbDNKTZzbfrScYFh3QFaYHcBWZkxespprt2kA70mKJQkDoViQTfpS4vfm69itOzkx3TqHQAcQy7Y88E";
 
   const donation = await Donation.create({
     hotel,
@@ -25,8 +30,20 @@ export const postNewDonation = async (req: Request, res: Response) => {
     quantity,
     description,
     bestBefore,
+    token,
   });
 
+  const tokens = await Token.findById("60a5126833228520d579a426");
+
+  if (tokens) {
+    await admin.messaging().sendMulticast({
+      tokens: tokens.token as any,
+      notification: {
+        title: "New Donation Availabele",
+        body: "Please Take a look",
+      },
+    });
+  }
   if (donation) {
     res.status(201).json(donation);
   }

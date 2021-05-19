@@ -17,7 +17,29 @@ import {
   updateUserProfileSuccess,
   updateUserProfileError,
   clearUserError,
+  getHistoryRequest,
+  getHistorySuccess,
+  getHistoryError,
 } from "./user";
+import {
+  nearbyHotelRequest,
+  nearbyHotelSuccess,
+  nearbyHotelError,
+  nearbyNGORequest,
+  nearbyNGOSuccess,
+  nearbyNGOError,
+  clearNearby,
+} from "./nearby";
+import {
+  donationRequest,
+  donationSuccess,
+  donationError,
+  recentDonationRequest,
+  recentDonationSuccess,
+  recentDonationError,
+  clearDonation,
+} from "./donation";
+import { orderRequest, orderSuccess, orderError, clearOrder } from "./order";
 
 export {
   loginAuthRequest,
@@ -36,4 +58,25 @@ export {
   updateUserProfileSuccess,
   updateUserProfileError,
   clearUserError,
+  getHistoryRequest,
+  getHistorySuccess,
+  getHistoryError,
+  nearbyHotelRequest,
+  nearbyHotelSuccess,
+  nearbyHotelError,
+  nearbyNGORequest,
+  nearbyNGOSuccess,
+  nearbyNGOError,
+  clearNearby,
+  donationRequest,
+  donationSuccess,
+  donationError,
+  recentDonationRequest,
+  recentDonationSuccess,
+  recentDonationError,
+  clearDonation,
+  orderRequest,
+  orderSuccess,
+  orderError,
+  clearOrder,
 };
