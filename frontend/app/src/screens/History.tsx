@@ -6,6 +6,7 @@ import {
   RefreshControl,
   StyleSheet,
 } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
 import Center from "../components/Center";
 import { View, Text } from "../components/Themed";
@@ -28,7 +29,7 @@ const History = () => {
   }, [errors.results]);
 
   useEffect(() => {
-    if (!history || history.length === 0) {
+    if (!history) {
       dispatch(getHistoryRequest());
     }
     setRefreshing(false);
@@ -39,70 +40,80 @@ const History = () => {
     dispatch(getHistoryRequest());
   };
 
-  return isLoading || history === null || history.length === 0 ? (
-    <Center>
-      <ActivityIndicator size={40} color="#2f95dc" />
-    </Center>
-  ) : profile?.isNgo ? (
-    <View>
-      <FlatList
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-        keyExtractor={(h) => h._id}
-        data={history as any}
-        renderItem={(h) => {
-          return (
-            <View style={styles.box}>
-              <Text style={styles.subHeading}>Order ID: {h.item._id}</Text>
-              <Text style={styles.heading}>Hotel: {h.item.hotel.name}</Text>
-              <Text style={styles.midHeading}>
-                Quantity: {h.item.donation.quantity}
-              </Text>
-              <Text style={styles.midHeading}>
-                Description: {h.item.donation.description}
-              </Text>
-              <Text style={styles.subHeading}>
-                {h.item.delivered ? "Delivered" : "Not Delivered"}
-              </Text>
-              <Text style={styles.subHeading}>
-                Delivered On:{" "}
-                {h.item.delivered
-                  ? h.item.deliveredOn.substring(0, 10)
-                  : "yet to be delivered"}
-              </Text>
-            </View>
-          );
-        }}
-      ></FlatList>
-    </View>
-  ) : (
-    <View>
-      <FlatList
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-        keyExtractor={(h) => h._id}
-        data={history as any}
-        renderItem={(h) => {
-          return (
-            <View style={styles.box}>
-              <Text style={styles.subHeading}>Donation ID: {h.item._id}</Text>
-              <Text style={styles.heading}>Quantity: {h.item.quantity}</Text>
-              <Text style={styles.heading}>
-                Description: {h.item.description}
-              </Text>
-              <Text style={styles.subHeading}>
-                {h.item.accepted ? "Donation Accepted" : "Not Accepted"}
-              </Text>
-              <Text style={styles.subHeading}>
-                Donated On: {h.item.donatedOn.substring(0, 10)}
-              </Text>
-            </View>
-          );
-        }}
-      ></FlatList>
-    </View>
+  return (
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
+      {isLoading || history === null ? (
+        <Center>
+          <ActivityIndicator size={40} color="#2f95dc" />
+        </Center>
+      ) : history.length === 0 ? (
+        <Center>
+          <Text>No History</Text>
+        </Center>
+      ) : profile?.isNgo ? (
+        <View>
+          <FlatList
+            keyExtractor={(h) => h._id}
+            data={history as any}
+            renderItem={(h) => {
+              return (
+                <View style={styles.box}>
+                  <Text style={styles.subHeading}>Order ID: {h.item._id}</Text>
+                  <Text style={styles.heading}>Hotel: {h.item.hotel.name}</Text>
+                  <Text style={styles.midHeading}>
+                    Quantity: {h.item.donation.quantity}
+                  </Text>
+                  <Text style={styles.midHeading}>
+                    Description: {h.item.donation.description}
+                  </Text>
+                  <Text style={styles.subHeading}>
+                    {h.item.delivered ? "Delivered" : "Not Delivered"}
+                  </Text>
+                  <Text style={styles.subHeading}>
+                    Delivered On:{" "}
+                    {h.item.delivered
+                      ? h.item.deliveredOn.substring(0, 10)
+                      : "yet to be delivered"}
+                  </Text>
+                </View>
+              );
+            }}
+          ></FlatList>
+        </View>
+      ) : (
+        <View>
+          <FlatList
+            keyExtractor={(h) => h._id}
+            data={history as any}
+            renderItem={(h) => {
+              return (
+                <View style={styles.box}>
+                  <Text style={styles.subHeading}>
+                    Donation ID: {h.item._id}
+                  </Text>
+                  <Text style={styles.heading}>
+                    Quantity: {h.item.quantity}
+                  </Text>
+                  <Text style={styles.heading}>
+                    Description: {h.item.description}
+                  </Text>
+                  <Text style={styles.subHeading}>
+                    {h.item.accepted ? "Donation Accepted" : "Not Accepted"}
+                  </Text>
+                  <Text style={styles.subHeading}>
+                    Donated On: {h.item.donatedOn.substring(0, 10)}
+                  </Text>
+                </View>
+              );
+            }}
+          ></FlatList>
+        </View>
+      )}
+    </ScrollView>
   );
 };
 
