@@ -22,7 +22,7 @@ export const postNewDonation = async (req: Request, res: Response) => {
 
   const token = fcmToken
     ? fcmToken
-    : "f5_6pYX_Ro2t2JeYR-6rIi:APA91bFt60oux74c4Y5kpjjbzeuOG5YqFNv3g5Q4BpLKZareGf64G2w5bLDeRTbDNKTZzbfrScYFh3QFaYHcBWZkxespprt2kA70mKJQkDoViQTfpS4vfm69itOzkx3TqHQAcQy7Y88E";
+    : "fKybcz34TJWgHMHKyQbyq5:APA91bH43aNFLxEwBLg1Z6jamqKTVaM3x20eQrbbUWhevMXUum32gYN3tpJ4z3_FwGKG3EgQcbK8foiAXeE8yHd3RQP5vQm2xMZCloH6okkPvPgRbTa7pWJCGgr1bxd6vnZYrBbUrPNF";
 
   const donation = await Donation.create({
     hotel,
